@@ -1,0 +1,32 @@
+<div class="form-class" style="width: 50%; position:absolute; top:20%; left:25%">
+  <h1>Login</h1>
+
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="off">
+
+    <!-- {{ model | json }} -->
+    <div class="form-group">
+      <label for="username">User Name</label>
+      <input type="text" class="form-control" required ngModel name="username" id="username" #username="ngModel">
+
+      <div *ngIf="username.invalid && (username.dirty || username.touched)">
+        <div *ngIf="username.errors?.['required']" class="alert alert-danger">
+          Username is required ⚠️.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" required ngModel name="password" id="password" #password="ngModel">
+
+      <div *ngIf="password.invalid && (password.dirty || password.touched)">
+        <div *ngIf="password.errors?.['required']" class="alert alert-danger">
+          Password is required ⚠️.
+        </div>
+      </div>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid"
+      class="btn-margin">Login</button>
+  </form>
+</div>
