@@ -4,5 +4,5 @@ export class UserModel {
   lastName!: string;
   email!: string;
   mobile!: string;
-  salary!: string;
+  age!: string;
 }

@@ -1,26 +1,18 @@
-.demo-table {
-  width: 90%;
-  margin: 0 auto;
-}
-
-.demo-button-container {
-  padding: 16px;
-}
-
-.demo-button + .demo-button {
-  margin-left: 8px;
-}
-
-.example-container {
-  height: 540px;
-  overflow: auto;
-  padding-bottom: 15px;
-}
-
-.extra-margin-class {
-  padding: 70px 0;
-}
-
 .extra-margin {
   margin: 10px 0 0 10px;
+}
+
+::ng-deep .success-snackbar {
+  background-color: green;
+  color: white;
+}
+
+::ng-deep .failure-snackbar {
+  background-color: red;
+  color: white;
+}
+
+::ng-deep .delete-snackbar {
+  background-color: brown;
+  color: white;
 }

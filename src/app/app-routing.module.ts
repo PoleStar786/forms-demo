@@ -4,6 +4,7 @@ import { AuthenticationGuard } from './authentication.guard';
 
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login-page', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
     component: HomePageComponent,
     canActivate: [AuthenticationGuard],
   },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

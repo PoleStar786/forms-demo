@@ -6,23 +6,15 @@
       "lastName": "Prajapati",
       "email": "prajapatidhruv1110@gmail.com",
       "mobile": "6353946018",
-      "salary": "$5,000,000"
-    },
-    {
-      "id": 2,
-      "firstName": "Pole",
-      "lastName": "Star",
-      "email": "polestar00@gmail.com",
-      "mobile": "1122334455",
-      "salary": "100,000 INR"
+      "age": "21"
     },
     {
       "id": 3,
-      "firstName": "kirtan",
+      "firstName": "Kirtan",
       "lastName": "Prajapati",
       "email": "kp@gmail.com",
       "mobile": "1122330099",
-      "salary": "$1,000,000,000"
+      "age": "22"
     }
   ],
   "comments": [],

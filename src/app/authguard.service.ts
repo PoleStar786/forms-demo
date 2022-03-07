@@ -4,9 +4,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthguardService {
+  isLoggedIn!: boolean;
   constructor() {}
 
   getToken() {
-    return !!localStorage.getItem('isLoggedIn');
+    this.isLoggedIn = !!localStorage.getItem('isLoggedIn');
+    return this.isLoggedIn;
   }
 }

@@ -3,13 +3,30 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from './../user';
 
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import { AuthguardService } from '../authguard.service';
+
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthguardService,
+    private _snackBar: MatSnackBar
+  ) {}
+
+  ngOnInit() {
+    if (this.authService.isLoggedIn) {
+      this.router.navigate(['/home-page']);
+    }
+  }
 
   accounts: User[] = [
     {
@@ -28,14 +45,27 @@ export class LoginPageComponent implements OnInit {
     },
   ];
 
+  hide = true;
   user = 'true';
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
+  openSnackBarOnFailure() {
+    this._snackBar.open(`User doesn't exists! 🤨`, '', {
+      duration: 3000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      panelClass: ['failure-snackbar'],
+    });
+  }
 
   onSubmit(form: NgForm) {
     if (this.accounts.some((el) => el.username === form.value.username)) {
-      this.router.navigate(['home-page']);
+      this.router.navigate(['/home-page']);
       localStorage.setItem('isLoggedIn', 'true');
     } else {
-      console.log('user does not exists.');
+      this.openSnackBarOnFailure();
     }
 
     // method - 1
@@ -53,6 +83,6 @@ export class LoginPageComponent implements OnInit {
     // console.log(status);
     // if(user.username === this.accounts[]){}
   }
-
-  ngOnInit(): void {}
 }
+
+// To run json server: json-server --watch db.json
