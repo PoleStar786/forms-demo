@@ -3,3 +3,9 @@
   bottom: 0;
   width: 100%;
 }
+
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+}

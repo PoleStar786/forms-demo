@@ -1,5 +1,5 @@
-<button mat-flat-button color="accent" (click)="toggleButton()" type="button" class="extra-margin"
-  data-bs-toggle="modal" data-bs-target="#exampleModal">Add User</button>
+<button mat-raised-button color="accent" (click)="toggleButton()" class="extra-margin" data-bs-toggle="modal"
+  title="ADD User" data-bs-target="#exampleModal">Add User</button>
 
 <!-- User Data in Table -->
 <table class="table mt-3">
@@ -10,7 +10,7 @@
       <th scope="col">Last Name</th>
       <th scope="col">Email</th>
       <th scope="col">Mobile no.</th>
-      <th scope="col">age</th>
+      <th scope="col">Age</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -26,7 +26,7 @@
       <td>
         <button mat-flat-button color="primary" (click)="editUser(row)" type="button" data-bs-toggle="modal"
           data-bs-target="#exampleModal">Edit</button>
-        <button mat-flat-button color="warn" (click)="deleteUser(row)" class="btn btn-danger mx-3">Delete</button>
+        <button mat-flat-button color="warn" (click)="deleteUser(row)" class="mx-1">Delete</button>
       </td>
     </tr>
   </tbody>
@@ -53,14 +53,14 @@
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Email ID</label>
-            <input type="text" formControlName="email" class="form-control" id="exampleInputPassword1">
+            <input type="email" formControlName="email" class="form-control" id="exampleInputPassword1">
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Mobile Number</label>
-            <input type="text" formControlName="mobile" class="form-control" id="exampleInputPassword1">
+            <input type="tel" formControlName="mobile" class="form-control" id="exampleInputPassword1">
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">age</label>
+            <label for="exampleInputPassword1" class="form-label">Age</label>
             <input type="text" formControlName="age" class="form-control" id="exampleInputPassword1">
           </div>
         </form>

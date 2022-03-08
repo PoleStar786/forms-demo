@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { UserModel } from './user-dashboard.model';
+import { UserModel } from '../../core/models/user-dashboard.model';
 
-import { ApiService } from '../shared/api.service';
-
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+import { ApiService } from '../../shared/shared-services/apis/api.service';
+import { SnackbarAlertService } from 'src/app/shared/shared-services/snackbar-alert/snackbar-alert.service';
 
 @Component({
   selector: 'app-home-page',
@@ -22,14 +17,12 @@ export class HomePageComponent implements OnInit {
   userData!: any;
   showAdd!: boolean;
   showUpdate!: boolean;
-
-  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  stateAlert!: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private api: ApiService,
-    private _snackBar: MatSnackBar
+    private _snackBar: SnackbarAlertService
   ) {}
 
   ngOnInit(): void {
@@ -42,42 +35,6 @@ export class HomePageComponent implements OnInit {
     });
 
     this.getUsers();
-  }
-
-  openSnackBarOnSuccess() {
-    this._snackBar.open('User Added Successfully. 👍', '', {
-      duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      panelClass: ['success-snackbar'],
-    });
-  }
-
-  openSnackBarOnFailure() {
-    this._snackBar.open('Something went wrong! 👎', '', {
-      duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      panelClass: ['failure-snackbar'],
-    });
-  }
-
-  openSnackBarOnDelete() {
-    this._snackBar.open('User Deleted! ⚠️', '', {
-      duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      panelClass: ['delete-snackbar'],
-    });
-  }
-
-  openSnackBarOnUpdate() {
-    this._snackBar.open('Data Updated Successfully! 🤖', '', {
-      duration: 3000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      panelClass: ['success-snackbar'],
-    });
   }
 
   toggleButton() {
@@ -95,14 +52,19 @@ export class HomePageComponent implements OnInit {
 
     this.api.postUser(this.userModelObj).subscribe(
       (res) => {
-        this.openSnackBarOnSuccess();
+        this.stateAlert = 'UAS'; // UC: User Added Successfully
+        this._snackBar.openSnackBar(this.stateAlert);
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();
         this.getUsers();
       },
       (err) => {
-        this.openSnackBarOnFailure();
+        this.stateAlert = 'SWW'; // Something went wrong
+        this._snackBar.openSnackBar(this.stateAlert);
+        let ref = document.getElementById('cancel');
+        ref?.click();
+        this.formValue.reset();
       }
     );
   }
@@ -115,7 +77,8 @@ export class HomePageComponent implements OnInit {
 
   deleteUser(row: any) {
     this.api.deleteUser(row.id).subscribe((res) => {
-      this.openSnackBarOnDelete();
+      this.stateAlert = 'UD'; // User Deleted
+      this._snackBar.openSnackBar(this.stateAlert);
       this.getUsers();
     });
   }
@@ -124,6 +87,7 @@ export class HomePageComponent implements OnInit {
     this.showAdd = false;
     this.showUpdate = true;
     this.userModelObj.id = row.id;
+
     this.formValue.controls['firstName'].setValue(row.firstName);
     this.formValue.controls['lastName'].setValue(row.lastName);
     this.formValue.controls['email'].setValue(row.email);
@@ -141,7 +105,8 @@ export class HomePageComponent implements OnInit {
     this.api
       .updateUser(this.userModelObj, this.userModelObj.id)
       .subscribe((res) => {
-        this.openSnackBarOnUpdate();
+        this.stateAlert = 'DUS'; // Data Updated Successfully
+        this._snackBar.openSnackBar(this.stateAlert);
         let ref = document.getElementById('cancel');
         ref?.click();
         this.formValue.reset();

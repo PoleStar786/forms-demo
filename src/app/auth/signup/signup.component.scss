@@ -6,7 +6,7 @@
   max-width: 400px;
   display: flex;
   flex-direction: column;
-  background-color: #faf3f3;
+  background-color: #eeeeee;
 }
 
 .mat-card:not([class*="mat-elevation-z"]) {
@@ -16,11 +16,15 @@
 .position-class {
   width: 50%;
   position: absolute;
-  top: 25%;
+  top: 20%;
   left: 10%;
 }
 
 ::ng-deep .failure-snackbar {
-  background-color: red;
+  background-color: brown;
   color: white;
+}
+
+.btn-signup {
+  cursor: pointer;
 }

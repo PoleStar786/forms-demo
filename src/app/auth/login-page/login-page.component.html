@@ -1,0 +1,89 @@
+<!-- <div class="position-class">
+
+  <form [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
+
+    <mat-card class="example-card">
+      <mat-card-title>
+        <h1>Login</h1>
+      </mat-card-title>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Enter your User Name</mat-label>
+        <input matInput formControlName="email" required name="username" id="username" placeholder="Add Username">
+        <mat-hint>id: dhruv1122</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Enter your Password</mat-label>
+        <input matInput formControlName="password" required name="password" id="password"
+          [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-hint>pass: 1234</mat-hint>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" class="btn-margin">Login</button>
+    </mat-card>
+  </form>
+
+</div> -->
+
+<!-- <label for="password">Password</label>
+      <input type="password" class="form-control" required ngModel name="password" id="password" #password="ngModel">
+      <div *ngIf="password.invalid && (password.dirty || password.touched)">
+        <div *ngIf="password.errors?.['required']" class="alert alert-danger">
+          Password is required ⚠️.
+        </div>
+      </div> -->
+
+<!-- <label for="username">User Name</label>
+      <input type="text" class="form-control" required ngModel name="username" id="username" #username="ngModel">
+      <div *ngIf="username.invalid && (username.dirty || username.touched)">
+        <div *ngIf="username.errors?.['required']" class="alert alert-danger">
+          Username is required ⚠️.
+        </div>
+      </div> -->
+
+
+<div class="position-class">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="off">
+
+    <mat-card class="example-card">
+      <mat-card-title>
+        <h1>Login</h1>
+      </mat-card-title>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Enter your User Name</mat-label>
+        <input matInput required ngModel name="email" id="email" #email="ngModel" placeholder="Add Username">
+        <mat-hint>email: js@mail.com</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Enter your Password</mat-label>
+        <input matInput required ngModel name="password" id="password" #password="ngModel">
+        <mat-hint>pass: 1111</mat-hint>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid"
+        class="btn-margin">Login</button>
+
+      <div class="btn-margin">
+        New User?
+        <a (click)="goToSignUp()" class="btn-signup">Sign Up</a>
+      </div>
+    </mat-card>
+  </form>
+
+</div>
+
+<!--
+          [type]="hide ? 'password' : 'text'"
+          <button mat-icon-button matSuffix (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button> 
+      -->

@@ -8,7 +8,7 @@ export class AuthguardService {
   constructor() {}
 
   getToken() {
-    this.isLoggedIn = !!localStorage.getItem('isLoggedIn');
+    this.isLoggedIn = !!sessionStorage.getItem('isLoggedIn');
     return this.isLoggedIn;
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthguardService } from './authguard.service';
+import { AuthguardService } from './core/guard-service/authguard.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +7,7 @@ import { AuthguardService } from './authguard.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  title!: 'forms-demo';
   constructor(public authguardService: AuthguardService) {}
-  title = 'forms-demo';
+  // tokenVisible: boolean = this.authguardService.getToken();
 }

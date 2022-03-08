@@ -1,0 +1,41 @@
+<div class="position-class">
+
+  <form [formGroup]="signUpForm" (ngSubmit)="signUp()" autocomplete="off">
+
+    <mat-card class="example-card">
+
+      <mat-card-title>
+        <h1>Sign UP</h1>
+      </mat-card-title>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Enter your Full Name</mat-label>
+        <input matInput formControlName="fullName" required name="fullname" id="fullName" placeholder="Add Full Name">
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Enter your Mobile Number</mat-label>
+        <input matInput formControlName="mobile" required name="mobile" id="mobile" placeholder="Add Mobile Number">
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Enter your Email</mat-label>
+        <input matInput formControlName="email" required name="email" id="email" placeholder="Add E-mail">
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Enter your Password</mat-label>
+        <input matInput formControlName="password" required name="password" id="password">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="!signUpForm.valid" class="btn-margin">Sign
+        Up</button>
+
+      <div class="btn-margin">
+        Already User?
+        <a (click)="goToLogin()" class="btn-signup">Login</a>
+      </div>
+    </mat-card>
+  </form>
+
+</div>
