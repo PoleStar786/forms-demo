@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { AuthenticationModule } from './auth/authentication/authentication.module';
 import { FeaturesModule } from './layout/features/features.module';
 import { MaterialModule } from './shared/material/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { MaterialModule } from './shared/material/material.module';
     AuthenticationModule,
     FeaturesModule,
     MaterialModule,
+    FlexLayoutModule,
   ],
   exports: [MaterialModule],
   providers: [],

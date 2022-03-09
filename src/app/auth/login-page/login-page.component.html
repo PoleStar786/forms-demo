@@ -48,7 +48,7 @@
 
 
 <div class="position-class">
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="off">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="on">
 
     <mat-card class="example-card">
       <mat-card-title>
@@ -57,9 +57,16 @@
 
       <mat-form-field appearance="standard">
         <mat-label>Enter your User Name</mat-label>
-        <input matInput required ngModel name="email" id="email" #email="ngModel" placeholder="Add Username">
+        <input matInput required ngModel name="email" [email]="true" id="email" #email="ngModel"
+          placeholder="Add Username">
         <mat-hint>email: js@mail.com</mat-hint>
       </mat-form-field>
+      <span
+        *ngIf="loginForm.controls['email']?.invalid && (loginForm.controls['email']?.dirty || loginForm.controls['email']?.touched)">
+        <mat-error *ngIf="loginForm.controls['email'].errors?.['required']">You must enter your E-mail!
+        </mat-error>
+        <mat-error *ngIf="loginForm.controls['email'].errors?.['email']">Not a valid E-mail!</mat-error>
+      </span>
 
       <mat-form-field appearance="standard">
         <mat-label>Enter your Password</mat-label>

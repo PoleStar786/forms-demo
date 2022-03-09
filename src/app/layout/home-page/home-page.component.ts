@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { UserModel } from '../../core/models/user-dashboard.model';
 
 import { ApiService } from '../../shared/shared-services/apis/api.service';
 import { SnackbarAlertService } from 'src/app/shared/shared-services/snackbar-alert/snackbar-alert.service';
+import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/delete-confirmation-dialog.component';
+
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-home-page',
@@ -12,26 +17,52 @@ import { SnackbarAlertService } from 'src/app/shared/shared-services/snackbar-al
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  formValue!: FormGroup;
+  formValue: FormGroup;
   userModelObj: UserModel = new UserModel();
-  userData!: any;
-  showAdd!: boolean;
-  showUpdate!: boolean;
-  stateAlert!: string;
+  userData: any;
+  showAdd: boolean;
+  showUpdate: boolean;
+  stateAlert: string;
+  dialogRef: MatDialogRef<DeleteConfirmationDialogComponent>;
+
+  displayedColumns: string[] = [
+    'id',
+    'firstName',
+    'lastName',
+    'email',
+    'mobile',
+    'age',
+    'actions',
+  ];
+  dataSource: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private api: ApiService,
-    private _snackBar: SnackbarAlertService
+    private _snackBar: SnackbarAlertService,
+    public dialogBox: MatDialog
   ) {}
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  // ngAfterViewInit() {
+  // this.dataSource.paginator = this.paginator;
+  // }
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
-      firstName: [''],
-      lastName: [''],
-      email: [''],
-      mobile: [''],
-      age: [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      mobile: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.pattern('^[0-9]*$'),
+        ],
+      ],
+      age: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
     });
 
     this.getUsers();
@@ -72,14 +103,32 @@ export class HomePageComponent implements OnInit {
   getUsers() {
     this.api.getUser().subscribe((res) => {
       this.userData = res;
+      this.dataSource = new MatTableDataSource<UserModel>(this.userData);
+      this.dataSource.paginator = this.paginator;
+      // this.dataSource = this.userData;
     });
   }
 
-  deleteUser(row: any) {
-    this.api.deleteUser(row.id).subscribe((res) => {
+  deleteUser(id: any) {
+    this.api.deleteUser(id).subscribe((res) => {
       this.stateAlert = 'UD'; // User Deleted
       this._snackBar.openSnackBar(this.stateAlert);
       this.getUsers();
+    });
+  }
+
+  openConfirmationDialog(row: any) {
+    this.dialogRef = this.dialogBox.open(DeleteConfirmationDialogComponent, {
+      disableClose: false,
+    });
+    this.dialogRef.componentInstance.confirmMessage =
+      'Are you sure you want to delete? 🤨';
+
+    this.dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.deleteUser(row.id);
+      }
+      this.dialogRef.close();
     });
   }
 

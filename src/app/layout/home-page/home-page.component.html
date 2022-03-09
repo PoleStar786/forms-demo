@@ -1,8 +1,95 @@
-<button mat-raised-button color="accent" (click)="toggleButton()" class="extra-margin" data-bs-toggle="modal"
-  title="ADD User" data-bs-target="#exampleModal">Add User</button>
+<div class="custom-container">
+  <button mat-raised-button color="accent" (click)="toggleButton()" class="extra-margin" data-bs-toggle="modal"
+    title="ADD User" data-bs-target="#exampleModal">Add User</button>
 
-<!-- User Data in Table -->
-<table class="table mt-3">
+  <!-- User Data in Card -->
+  <!-- <div class="content">
+    <div *ngFor="let row of userData">
+
+      <mat-card class="example-card custom-card">
+        <mat-card-title>{{row.firstName}} {{row.lastName}}</mat-card-title>
+        <mat-card-subtitle>{{row.email}}</mat-card-subtitle>
+        <mat-card-content>
+          <p>Mobile No.: {{row.mobile}}</p>
+          <p>Age: {{row.age}}</p>
+          <p>ID: {{row.id}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <a style="color:darkgoldenrod;" (click)="editUser(row)" type="button" data-bs-toggle="modal"
+            data-bs-target="#exampleModal"><i class="material-icons">edit</i></a>
+          <a style="color: red;" (click)="openConfirmationDialog(row)" class="mx-1"><i
+              class="material-icons">delete</i></a>
+        </mat-card-actions>
+      </mat-card>
+
+    </div>
+  </div> -->
+
+  <!-- User Data in material Table -->
+  <div class="container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <!-- first name -->
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> First Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+      </ng-container>
+
+      <!-- last name -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Last Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+      </ng-container>
+
+      <!-- email -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> E-mail </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <!-- mobile -->
+      <ng-container matColumnDef="mobile">
+        <th mat-header-cell *matHeaderCellDef> Mobile No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
+      </ng-container>
+
+      <!-- age -->
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef> Age </th>
+        <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <a style="color:darkgoldenrod;" (click)="editUser(element)" type="button" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            <i class="material-icons">edit</i>
+          </a>
+          &nbsp;
+          <a style="color: red;" (click)="openConfirmationDialog(element)" type="button" class="mx-1">
+            <i class="material-icons">delete</i>
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of users">
+    </mat-paginator>
+  </div>
+
+
+  <!-- User Data in bootstrap Table -->
+  <!-- <table class="table mt-3">
   <thead>
     <tr>
       <th scope="col">ID</th>
@@ -30,45 +117,93 @@
       </td>
     </tr>
   </tbody>
-</table>
+</table> -->
 
-<!-- User Data Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">User Detail</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="formValue">
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">First Name</label>
-            <input type="text" formControlName="firstName" class="form-control" id="exampleInputEmail1"
-              aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Last Name</label>
-            <input type="text" formControlName="lastName" class="form-control" id="exampleInputPassword1">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Email ID</label>
-            <input type="email" formControlName="email" class="form-control" id="exampleInputPassword1">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Mobile Number</label>
-            <input type="tel" formControlName="mobile" class="form-control" id="exampleInputPassword1">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Age</label>
-            <input type="text" formControlName="age" class="form-control" id="exampleInputPassword1">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" *ngIf="showAdd" (click)="postUserDetails()" class="btn btn-primary">Add</button>
-        <button type="button" *ngIf="showUpdate" (click)="updateUser()" class="btn btn-primary">Update</button>
+  <!-- User Data Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">User Detail</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="formValue">
+
+            <div class="mb-3">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" formControlName="firstName" class="form-control" id="firstName"
+                aria-describedby="emailHelp">
+
+              <span
+                *ngIf="formValue.controls['firstName'].invalid && (formValue.controls['firstName'].dirty || formValue.controls['firstName'].touched)">
+                <mat-error *ngIf="formValue.controls['firstName'].errors?.['required']">You must enter your first name!
+                </mat-error>
+              </span>
+            </div>
+
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="text" formControlName="lastName" class="form-control" id="lastName">
+
+              <span
+                *ngIf="formValue.controls['lastName'].invalid && (formValue.controls['lastName'].dirty || formValue.controls['lastName'].touched)">
+                <mat-error *ngIf="formValue.controls['lastName'].errors?.['required']">You must enter your last name!
+                </mat-error>
+              </span>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email ID</label>
+              <input type="email" formControlName="email" class="form-control" id="email">
+
+              <span
+                *ngIf="formValue.controls['email']?.invalid && (formValue.controls['email']?.dirty || formValue.controls['email']?.touched)">
+                <mat-error *ngIf="formValue.controls['email'].errors?.['required']">You must enter your E-mail!
+                </mat-error>
+                <mat-error *ngIf="formValue.controls['email'].errors?.['email']">Not a valid E-mail!</mat-error>
+              </span>
+              <!-- <mat-error *ngIf="formValue.controls['email'].errors">{{getErrorMessageEmail()}}</mat-error> -->
+            </div>
+
+            <div class="mb-3">
+              <label for="mobile" class="form-label">Mobile Number</label>
+              <input type="tel" formControlName="mobile" maxlength="10" class="form-control" id="mobile">
+
+              <span
+                *ngIf="formValue.controls['mobile']?.invalid && (formValue.controls['mobile']?.dirty || formValue.controls['mobile']?.touched)">
+                <mat-error *ngIf="formValue.controls['mobile'].errors?.['required']">You must enter your mobile number!
+                </mat-error>
+                <mat-error *ngIf="formValue.controls['mobile'].errors?.['pattern']">Please, Enter digits only!
+                </mat-error>
+                <br>
+                <mat-error *ngIf="formValue.controls['mobile'].errors?.['minlength']">Enter 10 digit number!
+                </mat-error>
+              </span>
+
+            </div>
+
+            <div class="mb-3">
+              <label for="age" class="form-label">Age</label>
+              <input type="text" formControlName="age" maxlength="3" class="form-control" id="age">
+
+              <span
+                *ngIf="formValue.controls['age'].invalid && (formValue.controls['age'].dirty || formValue.controls['age'].touched)">
+                <mat-error *ngIf="formValue.controls['age'].errors?.['required']">You must enter your age!</mat-error>
+                <mat-error *ngIf="formValue.controls['age'].errors?.['pattern']">
+                  Please, Enter digits only!
+                </mat-error>
+              </span>
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" *ngIf="showAdd" [disabled]="!formValue.valid" (click)="postUserDetails()"
+            class="btn btn-primary">Add</button>
+          <button type="button" *ngIf="showUpdate" (click)="updateUser()" class="btn btn-primary">Update</button>
+        </div>
       </div>
     </div>
   </div>
