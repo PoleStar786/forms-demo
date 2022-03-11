@@ -1,3 +1,4 @@
+import { UserModel } from './../../../core/models/user-dashboard.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 // import { map } from 'rxjs/operators';
@@ -8,20 +9,20 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  postUser(data: any) {
-    return this.http.post<any>('http://localhost:3000/posts', data);
+  postUser(data: UserModel) {
+    return this.http.post<UserModel>('http://localhost:3000/posts', data);
   }
 
   getUser() {
-    return this.http.get<any>('http://localhost:3000/posts');
+    return this.http.get<UserModel>('http://localhost:3000/posts');
   }
 
-  updateUser(data: any, id: number) {
-    return this.http.put<any>('http://localhost:3000/posts/' + id, data);
+  updateUser(data: UserModel, id: number) {
+    return this.http.put<UserModel>('http://localhost:3000/posts/' + id, data);
   }
 
   deleteUser(id: number) {
-    return this.http.delete<any>('http://localhost:3000/posts/' + id);
+    return this.http.delete<UserModel>('http://localhost:3000/posts/' + id);
   }
 }
 

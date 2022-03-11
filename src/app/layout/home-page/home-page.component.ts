@@ -11,6 +11,10 @@ import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
+import { interval, of } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -23,6 +27,7 @@ export class HomePageComponent implements OnInit {
   showAdd: boolean;
   showUpdate: boolean;
   stateAlert: string;
+  loading: boolean = true;
   dialogRef: MatDialogRef<DeleteConfirmationDialogComponent>;
 
   displayedColumns: string[] = [
@@ -45,10 +50,6 @@ export class HomePageComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  // ngAfterViewInit() {
-  // this.dataSource.paginator = this.paginator;
-  // }
-
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -59,13 +60,31 @@ export class HomePageComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(10),
-          Validators.pattern('^[0-9]*$'),
+          Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
         ],
       ],
       age: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
     });
 
     this.getUsers();
+
+    /* Operators */
+    /* pipeable operators */
+    // example: map
+    /* of(1, 2, 3)
+      .pipe(map((x) => x * x))
+      .subscribe((v) => console.log(`Value: ${v}`));
+
+    // example: first
+    of(1, 2, 3)
+      .pipe(first()) // last also exists
+      .subscribe((v) => console.log(`Value: ${v}`));
+
+    // pipeable operators 
+    // example: interval
+    const obl = interval(1000);
+    const takeFourNumbers = obl.pipe(take(4));
+    takeFourNumbers.subscribe((x) => console.log(`Next: ${x}`)); */
   }
 
   toggleButton() {
@@ -105,11 +124,11 @@ export class HomePageComponent implements OnInit {
       this.userData = res;
       this.dataSource = new MatTableDataSource<UserModel>(this.userData);
       this.dataSource.paginator = this.paginator;
-      // this.dataSource = this.userData;
+      this.loading = false;
     });
   }
 
-  deleteUser(id: any) {
+  deleteUser(id: number) {
     this.api.deleteUser(id).subscribe((res) => {
       this.stateAlert = 'UD'; // User Deleted
       this._snackBar.openSnackBar(this.stateAlert);
@@ -117,7 +136,7 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  openConfirmationDialog(row: any) {
+  openConfirmationDialog(row: UserModel) {
     this.dialogRef = this.dialogBox.open(DeleteConfirmationDialogComponent, {
       disableClose: false,
     });
@@ -132,7 +151,7 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  editUser(row: any) {
+  editUser(row: UserModel) {
     this.showAdd = false;
     this.showUpdate = true;
     this.userModelObj.id = row.id;

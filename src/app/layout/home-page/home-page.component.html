@@ -26,6 +26,19 @@
   </div> -->
 
   <!-- User Data in material Table -->
+
+  <div class="loading-center" *ngIf="loading">
+    <mat-spinner diameter="40" color="accent"></mat-spinner>
+
+    <!-- <div *ngIf="loading" class="loadingio-spinner-ripple-gqethe5acrm">
+      <div class="ldio-6ub8dj6nl3q">
+        <div></div>
+        <div></div>
+      </div>
+    </div> -->
+  </div>
+
+
   <div class="container">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -202,7 +215,8 @@
           <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" *ngIf="showAdd" [disabled]="!formValue.valid" (click)="postUserDetails()"
             class="btn btn-primary">Add</button>
-          <button type="button" *ngIf="showUpdate" (click)="updateUser()" class="btn btn-primary">Update</button>
+          <button type="button" *ngIf="showUpdate" [disabled]="!formValue.valid" (click)="updateUser()"
+            class="btn btn-primary">Update</button>
         </div>
       </div>
     </div>

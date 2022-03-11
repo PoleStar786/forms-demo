@@ -9,8 +9,8 @@ import {
   providedIn: 'root',
 })
 export class SnackbarAlertService {
-  alertMessage!: string;
-  classState!: string;
+  alertMessage: string;
+  classState: string;
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -24,6 +24,7 @@ export class SnackbarAlertService {
       UD: 'User Deleted! ⚠️',
       DUS: 'Data Updated Successfully! 🤖',
       UDE: `User doesn't Exists! 🤖`,
+      SS: 'SignUp Successful. 🥳',
     };
 
     const alertContentState: any = {
@@ -32,6 +33,7 @@ export class SnackbarAlertService {
       UD: 'delete',
       DUS: 'success',
       UDE: 'failure',
+      SS: 'success',
     };
 
     return [

@@ -1,3 +1,4 @@
+import { User } from './../../core/interfaces/user';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -30,12 +31,12 @@ export class LoginPageComponent implements OnInit {
 
   hide = true;
   user = 'true';
-  stateAlert!: string;
+  stateAlert: string;
 
   onSubmit(form: NgForm) {
     this.http.get<any>('http://localhost:3000/signupUsers').subscribe(
       (res) => {
-        const user = res.find((a: any) => {
+        const user = res.find((a: User) => {
           return (
             a.email === form.value.email && a.password === form.value.password
           );
@@ -48,6 +49,8 @@ export class LoginPageComponent implements OnInit {
           this.stateAlert = 'UDE'; // User doesn't exists!
           this._snackBar.openSnackBar(this.stateAlert);
         }
+
+        // res.next;
       },
       (err) => {
         this.stateAlert = 'SWW'; // Something went wrong

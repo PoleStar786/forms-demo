@@ -1,14 +1,11 @@
+import { User } from './../../core/interfaces/user';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  MinLengthValidator,
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { AuthguardService } from 'src/app/core/guard-service/authguard.service';
+import { SnackbarAlertService } from 'src/app/shared/shared-services/snackbar-alert/snackbar-alert.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,6 +14,7 @@ import { AuthguardService } from 'src/app/core/guard-service/authguard.service';
 })
 export class SignupComponent implements OnInit {
   hide: boolean = true;
+  stateAlert: string;
 
   public signUpForm!: FormGroup;
 
@@ -24,12 +22,13 @@ export class SignupComponent implements OnInit {
     private formbuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private authService: AuthguardService
+    private authService: AuthguardService,
+    private _snackBar: SnackbarAlertService
   ) {}
 
   ngOnInit(): void {
     this.signUpForm = this.formbuilder.group({
-      fullName: [''],
+      fullName: ['', Validators.required],
       mobile: [
         '',
         [
@@ -39,12 +38,16 @@ export class SignupComponent implements OnInit {
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
-      password: [''],
+      password: ['', Validators.required],
     });
 
     if (this.authService.isLoggedIn) {
       this.router.navigate(['/home-page']);
     }
+  }
+
+  get fullName() {
+    return this.signUpForm.get('fullName');
   }
 
   get email() {
@@ -55,9 +58,17 @@ export class SignupComponent implements OnInit {
     return this.signUpForm.get('mobile');
   }
 
+  get password() {
+    return this.signUpForm.get('password');
+  }
+
+  getErrorMessageFullname() {
+    return 'You must enter full name!';
+  }
+
   getErrorMessageEmail() {
     if (this.email?.hasError('required')) {
-      return 'You must enter a value!';
+      return 'You must enter E-mail!';
     }
 
     return this.email?.hasError('email') ? 'Not a valid E-mail!' : '';
@@ -65,7 +76,7 @@ export class SignupComponent implements OnInit {
 
   getErrorMessageMobile() {
     if (this.mobile?.hasError('required')) {
-      return 'You must enter a value!';
+      return 'You must enter mobile number!';
     } else if (this.mobile?.hasError('minlength')) {
       return 'Enter 10 digit number!';
     }
@@ -73,17 +84,23 @@ export class SignupComponent implements OnInit {
     return this.mobile?.hasError('pattern') ? 'Please, Enter digits only!' : '';
   }
 
+  getErrorMessagePassword() {
+    return 'You must enter password!';
+  }
+
   signUp() {
     this.http
-      .post<any>('http://localhost:3000/signupUsers', this.signUpForm.value)
+      .post<User>('http://localhost:3000/signupUsers', this.signUpForm.value)
       .subscribe(
         (res) => {
-          alert('SignUp Successfully!');
+          this.stateAlert = 'SS'; // SignUp Successful
+          this._snackBar.openSnackBar(this.stateAlert);
           this.signUpForm.reset();
           this.router.navigate(['/login-page']);
         },
         (err) => {
-          alert('Something went wrong!');
+          this.stateAlert = 'SWW'; // Something went wrong
+          this._snackBar.openSnackBar(this.stateAlert);
         }
       );
   }

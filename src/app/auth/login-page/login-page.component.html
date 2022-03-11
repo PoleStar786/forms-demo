@@ -56,9 +56,8 @@
       </mat-card-title>
 
       <mat-form-field appearance="standard">
-        <mat-label>Enter your User Name</mat-label>
-        <input matInput required ngModel name="email" [email]="true" id="email" #email="ngModel"
-          placeholder="Add Username">
+        <mat-label>E-mail</mat-label>
+        <input matInput required ngModel name="email" [email]="true" id="email" #email="ngModel" placeholder="E-mail">
         <mat-hint>email: js@mail.com</mat-hint>
       </mat-form-field>
       <span
@@ -69,10 +68,15 @@
       </span>
 
       <mat-form-field appearance="standard">
-        <mat-label>Enter your Password</mat-label>
-        <input matInput required ngModel name="password" id="password" #password="ngModel">
+        <mat-label>Password</mat-label>
+        <input matInput required ngModel name="password" id="password" #password="ngModel" placeholder="Password">
         <mat-hint>pass: 1111</mat-hint>
       </mat-form-field>
+      <span
+        *ngIf="loginForm.controls['password']?.invalid && (loginForm.controls['password']?.dirty || loginForm.controls['password']?.touched)">
+        <mat-error *ngIf="loginForm.controls['password'].errors?.['required']">You must enter your Password!
+        </mat-error>
+      </span>
 
       <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid"
         class="btn-margin">Login</button>

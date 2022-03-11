@@ -10,15 +10,16 @@
 
       <mat-form-field appearance="standard">
         <mat-label>Enter your Full Name</mat-label>
-        <input matInput formControlName="fullName" type="text" required name="fullname" id="fullName"
+        <input matInput formControlName="fullName" type="text" required name="fullName" id="fullName"
           placeholder="Add Full Name">
+        <mat-error *ngIf="fullName?.invalid">{{getErrorMessageFullname()}}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="standard">
         <mat-label>Enter your Mobile Number</mat-label>
-        <input matInput formControlName="mobile" type="tel" pattern="^[0-9]*$" maxlength="10" required name="mobile"
-          id="mobile" placeholder="Add Mobile Number">
-        <mat-error *ngIf="email?.invalid">{{getErrorMessageMobile()}}</mat-error>
+        <input matInput formControlName="mobile" type="tel" maxlength="10" required name="mobile" id="mobile"
+          placeholder="Add Mobile Number">
+        <mat-error *ngIf="mobile?.invalid">{{getErrorMessageMobile()}}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="standard">
@@ -30,6 +31,7 @@
       <mat-form-field appearance="standard">
         <mat-label>Enter your Password</mat-label>
         <input matInput formControlName="password" type="text" required name="password" id="password">
+        <mat-error *ngIf="password?.invalid">{{getErrorMessagePassword()}}</mat-error>
       </mat-form-field>
 
       <button mat-raised-button color="primary" type="submit" [disabled]="!signUpForm.valid" class="btn-margin">Sign
