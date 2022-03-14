@@ -7,6 +7,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { DeleteConfirmationDialogComponent } from '../home-page/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { EditFormComponent } from '../home-page/edit-form/edit-form.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { DeleteConfirmationDialogComponent } from '../home-page/delete-confirmat
     HeaderComponent,
     PageNotFoundComponent,
     DeleteConfirmationDialogComponent,
+    EditFormComponent,
   ],
   imports: [CommonModule, MaterialModule, ReactiveFormsModule],
   exports: [
@@ -23,6 +25,7 @@ import { DeleteConfirmationDialogComponent } from '../home-page/delete-confirmat
     HeaderComponent,
     PageNotFoundComponent,
     DeleteConfirmationDialogComponent,
+    EditFormComponent,
   ],
 })
 export class FeaturesModule {}

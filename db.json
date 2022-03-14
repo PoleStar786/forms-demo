@@ -1,126 +1,52 @@
 {
   "posts": [
     {
-      "id": 3,
-      "firstName": "mathew",
-      "lastName": "anderson",
-      "email": "ma@mail.com",
-      "mobile": "333333333",
-      "age": "33"
-    },
-    {
-      "id": 4,
-      "firstName": "Boby",
-      "lastName": "Deol",
-      "email": "bd@mail.com",
-      "mobile": "4444444444",
-      "age": "44"
-    },
-    {
-      "id": 5,
-      "firstName": "dev",
-      "lastName": "bishop",
-      "email": "db@mail.com",
-      "mobile": "5555555555",
-      "age": "55"
-    },
-    {
-      "id": 6,
-      "firstName": "mac",
-      "lastName": "grill",
-      "email": "mg@mail.com",
-      "mobile": "6666666666",
-      "age": "66"
-    },
-    {
-      "id": 7,
-      "firstName": "japen",
-      "lastName": "dave",
-      "email": "jd@mail.com",
-      "mobile": "7777777777",
-      "age": "77"
-    },
-    {
-      "id": 8,
-      "firstName": "Dhruv",
-      "lastName": "Prajapati",
-      "email": "prajapatidhruv1110@gmail.com",
-      "mobile": "6353946018",
-      "age": "22"
-    }
-  ],
-  "signupUsers": [
-    {
-      "fullName": "Dhruv Prajapati",
-      "email": "prajapatidhruv1110@gmail.com",
+      "firstName": "Avi",
+      "lastName": "Manu",
+      "mobile": "2343344354",
+      "email": "am@mail.com",
       "password": "1234",
-      "mobile": "+916353946018",
+      "age": "22",
       "id": 1
     },
     {
-      "fullName": "Dhruv Prajapati",
-      "email": "prajapatidhruv1110@gmail.com",
-      "password": "1122",
-      "mobile": "+916353946018",
+      "firstName": "Aarush",
+      "lastName": "Sehgal",
+      "mobile": "3265987410",
+      "email": "2018095900007597@spu.ac.in",
+      "password": "1234",
+      "age": "45",
       "id": 2
     },
     {
-      "fullName": "Aarush Sehgal",
-      "email": "2018095900007597@spu.ac.in",
-      "password": "1133",
-      "mobile": "3265987410",
+      "firstName": "Dhruv",
+      "lastName": "Prajapati",
+      "mobile": "6353946018",
+      "email": "prajapatidhruv1110@gmail.com",
+      "password": "1234",
+      "age": "22",
       "id": 3
     },
     {
-      "fullName": "Jay Sinha",
-      "email": "js@mail.com",
-      "password": "1111",
+      "firstName": "Jay",
+      "lastName": "Sinha",
       "mobile": "1232112321",
+      "email": "js@mail.com",
+      "password": "1234",
+      "age": "43",
       "id": 4
     },
     {
-      "fullName": "Jack Pery",
+      "firstName": "Jack",
+      "lastName": "Pery",
+      "mobile": "9632587410",
       "email": "jp@mail.com",
       "password": "1234",
-      "mobile": "9632587410",
+      "age": "34",
       "id": 5
-    },
-    {
-      "fullName": "mist",
-      "email": "mh@mail.com",
-      "password": "1234",
-      "mobile": "6575745456",
-      "id": 6
-    },
-    {
-      "fullName": "Dhruv Prajapati",
-      "mobile": "6353946018",
-      "email": "praj@gmail.com",
-      "password": "1234",
-      "id": 7
-    },
-    {
-      "fullName": "Jay Sinha",
-      "mobile": "1232112321",
-      "email": "ja@mail.com",
-      "password": "1234",
-      "id": 8
-    },
-    {
-      "fullName": "Jay Sinha",
-      "mobile": "1232112321",
-      "email": "jss@mail.com",
-      "password": "12",
-      "id": 9
-    },
-    {
-      "fullName": "Aarush Sehgal",
-      "mobile": "3265987410",
-      "email": "2018095900007597@spu.ac.in",
-      "password": "12",
-      "id": 10
     }
   ],
+  "signupUsers": [],
   "profile": {
     "name": "typicode"
   }

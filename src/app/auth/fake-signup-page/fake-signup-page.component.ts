@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -9,15 +10,16 @@ import { AuthguardService } from 'src/app/core/guard-service/authguard.service';
 import { SnackbarAlertService } from 'src/app/shared/shared-services/snackbar-alert/snackbar-alert.service';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss'],
+  selector: 'app-fake-signup-page',
+  templateUrl: './fake-signup-page.component.html',
+  styleUrls: ['./fake-signup-page.component.scss'],
 })
-export class SignupComponent implements OnInit {
+export class FakeSignupPageComponent implements OnInit {
+  // signUpFormValue: FormGroup;
   hide: boolean = true;
   stateAlert: string;
 
-  public signUpForm: FormGroup;
+  public signUpFormValue: FormGroup;
 
   constructor(
     private formbuilder: FormBuilder,
@@ -28,18 +30,16 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.signUpForm = this.formbuilder.group({
-      fullName: ['', Validators.required],
+    this.signUpFormValue = this.formbuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       mobile: [
         '',
-        [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
-        ],
+        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
+      age: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
     });
 
     if (this.authService.isLoggedIn) {
@@ -47,56 +47,14 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  get fullName() {
-    return this.signUpForm.get('fullName');
-  }
-
-  get email() {
-    return this.signUpForm.get('email');
-  }
-
-  get mobile() {
-    return this.signUpForm.get('mobile');
-  }
-
-  get password() {
-    return this.signUpForm.get('password');
-  }
-
-  getErrorMessageFullname() {
-    return 'You must enter full name!';
-  }
-
-  getErrorMessageEmail() {
-    if (this.email?.hasError('required')) {
-      return 'You must enter E-mail!';
-    }
-
-    return this.email?.hasError('email') ? 'Not a valid E-mail!' : '';
-  }
-
-  getErrorMessageMobile() {
-    if (this.mobile?.hasError('required')) {
-      return 'You must enter mobile number!';
-    } else if (this.mobile?.hasError('minlength')) {
-      return 'Enter 10 digit number!';
-    }
-
-    return this.mobile?.hasError('pattern') ? 'Please, Enter digits only!' : '';
-  }
-
-  getErrorMessagePassword() {
-    return 'You must enter password!';
-  }
-
   signUp() {
     this.http
-      .post<User>('http://localhost:3000/signupUsers', this.signUpForm.value)
+      .post<User>('http://localhost:3000/posts', this.signUpFormValue.value)
       .subscribe(
         (res) => {
           this.stateAlert = 'SS'; // SignUp Successful
           this._snackBar.openSnackBar(this.stateAlert);
-          this.signUpForm.reset();
+          this.signUpFormValue.reset();
           this.router.navigate(['/login-page']);
         },
         (err) => {

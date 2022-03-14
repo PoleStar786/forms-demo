@@ -19,21 +19,23 @@ export class SnackbarAlertService {
 
   alertContent(alertType: string) {
     const alertContentMessage: any = {
+      UD: 'User Deleted! ⚠️',
+      SS: 'SignUp Successful. 🥳',
       UAS: 'User Added Successfully. 🎉',
       SWW: 'Something went wrong! 👎',
-      UD: 'User Deleted! ⚠️',
       DUS: 'Data Updated Successfully! 🤖',
       UDE: `User doesn't Exists! 🤖`,
-      SS: 'SignUp Successful. 🥳',
+      CDU: 'Oops, cannot delete Logged In User! 🤖',
     };
 
     const alertContentState: any = {
+      UD: 'delete',
+      SS: 'success',
       UAS: 'success',
       SWW: 'failure',
-      UD: 'delete',
       DUS: 'success',
       UDE: 'failure',
-      SS: 'success',
+      CDU: 'failure',
     };
 
     return [

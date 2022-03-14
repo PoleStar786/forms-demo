@@ -58,7 +58,6 @@
       <mat-form-field appearance="standard">
         <mat-label>E-mail</mat-label>
         <input matInput required ngModel name="email" [email]="true" id="email" #email="ngModel" placeholder="E-mail">
-        <mat-hint>email: js@mail.com</mat-hint>
       </mat-form-field>
       <span
         *ngIf="loginForm.controls['email']?.invalid && (loginForm.controls['email']?.dirty || loginForm.controls['email']?.touched)">
@@ -70,7 +69,6 @@
       <mat-form-field appearance="standard">
         <mat-label>Password</mat-label>
         <input matInput required ngModel name="password" id="password" #password="ngModel" placeholder="Password">
-        <mat-hint>pass: 1111</mat-hint>
       </mat-form-field>
       <span
         *ngIf="loginForm.controls['password']?.invalid && (loginForm.controls['password']?.dirty || loginForm.controls['password']?.touched)">

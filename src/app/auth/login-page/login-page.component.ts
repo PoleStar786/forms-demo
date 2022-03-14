@@ -32,9 +32,10 @@ export class LoginPageComponent implements OnInit {
   hide = true;
   user = 'true';
   stateAlert: string;
+  cantDelete: string;
 
   onSubmit(form: NgForm) {
-    this.http.get<any>('http://localhost:3000/signupUsers').subscribe(
+    this.http.get<any>('http://localhost:3000/posts').subscribe(
       (res) => {
         const user = res.find((a: User) => {
           return (
@@ -43,6 +44,7 @@ export class LoginPageComponent implements OnInit {
         });
         if (user) {
           form.reset();
+          sessionStorage.setItem('cantDelete', user.id);
           this.router.navigate(['/home-page']);
           sessionStorage.setItem('isLoggedIn', 'true');
         } else {
@@ -96,7 +98,7 @@ export class LoginPageComponent implements OnInit {
 
 /////////////////////////////////////////////////
 // login() {
-//   this.http.get<any>('http://localhost:3000/signupUsers').subscribe(
+//   this.http.get<any>('http://localhost:3000/posts').subscribe(
 //     (res) => {
 //       const user = res.find((a: any) => {
 //         return (

@@ -1,0 +1,17 @@
+/* edit-form */
+.custom-card {
+  max-width: 497px;
+  display: flex;
+  flex-direction: column;
+  background-color: #eeeeee;
+}
+
+.mat-card:not([class*="mat-elevation-z"]) {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.custom-space-class {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
