@@ -13,7 +13,7 @@
       "firstName": "Aarush",
       "lastName": "Sehgal",
       "mobile": "3265987410",
-      "email": "2018095900007597@spu.ac.in",
+      "email": "as@spu.ac.in",
       "password": "1234",
       "age": "45",
       "id": 2
@@ -21,8 +21,8 @@
     {
       "firstName": "Dhruv",
       "lastName": "Prajapati",
-      "mobile": "6353946018",
-      "email": "prajapatidhruv1110@gmail.com",
+      "mobile": "6353946090",
+      "email": "dp@mail.com",
       "password": "1234",
       "age": "22",
       "id": 3
@@ -33,17 +33,35 @@
       "mobile": "1232112321",
       "email": "js@mail.com",
       "password": "1234",
-      "age": "43",
+      "age": "34",
       "id": 4
     },
     {
-      "firstName": "Jack",
+      "firstName": "Jacki",
       "lastName": "Pery",
       "mobile": "9632587410",
       "email": "jp@mail.com",
       "password": "1234",
       "age": "34",
       "id": 5
+    },
+    {
+      "firstName": "Kathan",
+      "lastName": "Patel",
+      "mobile": "1234321344",
+      "email": "kp@mail.com",
+      "password": "1234",
+      "age": "11",
+      "id": 6
+    },
+    {
+      "firstName": "Minnat",
+      "lastName": "Murli",
+      "mobile": "0192836231",
+      "email": "mm@mail.com",
+      "password": "1234",
+      "age": "24",
+      "id": 7
     }
   ],
   "signupUsers": [],

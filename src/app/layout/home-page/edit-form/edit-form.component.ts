@@ -57,13 +57,21 @@ export class EditFormComponent implements OnInit {
 
     this.api.updateUser(this.editData, this.editData.id).subscribe({
       next: (res) => {
+        if (
+          JSON.parse(sessionStorage.getItem('loggedInUser') || '{}').id ===
+          this.editData.id
+        ) {
+          this.api.userNameSub$.next(this.editData);
+          sessionStorage.setItem('loggedInUser', JSON.stringify(this.editData));
+        }
+
         this.stateAlert = 'DUS'; // Data Updated Successfully
         this._snackBar.openSnackBar(this.stateAlert);
         this.dialogRef.close();
         this.formValue.reset();
       },
       error: () => {
-        'error while updation!';
+        'error while updating data! 🚧';
       },
     });
   }

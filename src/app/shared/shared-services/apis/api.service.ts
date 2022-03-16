@@ -1,12 +1,16 @@
 import { UserModel } from './../../../core/models/user-dashboard.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Subject, BehaviorSubject } from 'rxjs';
 // import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
+  public userNameSub$ = new Subject<UserModel>();
+  public toggleHF = new BehaviorSubject<boolean>(false);
+
   constructor(private http: HttpClient) {}
 
   postUser(data: UserModel) {
@@ -28,6 +32,10 @@ export class ApiService {
 
 // .pipe(
 //   map((res: any) => {
-//     return res;
+//     sessionStorage.setItem(
+//             'loggedUserName',
+//             JSON.stringify(res.firstName)
+//           );
+//           this.api.userNameSub$.next(res);
 //   })
 // );

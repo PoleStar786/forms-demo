@@ -3,6 +3,6 @@ export class UserModel {
   firstName: string;
   lastName: string;
   email: string;
-  mobile: string;
-  age: string;
+  mobile: number;
+  age: number;
 }

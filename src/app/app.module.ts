@@ -7,8 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-import { AuthenticationModule } from './auth/authentication/authentication.module';
-import { FeaturesModule } from './layout/features/features.module';
+import { AuthenticationModule } from './auth/authentication.module';
+import { FeaturesModule } from './layout/features.module';
 import { MaterialModule } from './shared/material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 

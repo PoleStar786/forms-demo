@@ -12,10 +12,19 @@ const routes: Routes = [
   { path: '', redirectTo: '/login-page', pathMatch: 'full' },
   { path: 'login-page', component: LoginPageComponent },
   { path: 'signup-page', component: FakeSignupPageComponent },
-  { path: 'fake-page', component: SignupComponent },
+  {
+    path: 'fake-page',
+    // loadChildren: () =>
+    //   import('./auth/authentication.module').then(
+    //     (i) => i.AuthenticationModule
+    //   ),
+    component: SignupComponent,
+  },
   {
     path: 'home-page',
     component: HomePageComponent,
+    // loadChildren: () =>
+    //   import('./layout/features.module').then((i) => i.FeaturesModule),
     canActivate: [AuthenticationGuard],
   },
   { path: '**', component: PageNotFoundComponent },

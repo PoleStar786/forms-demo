@@ -3,10 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-import { User } from './../../core/interfaces/user';
-
 import { AuthguardService } from 'src/app/core/guard-service/authguard.service';
 import { SnackbarAlertService } from 'src/app/shared/shared-services/snackbar-alert/snackbar-alert.service';
+import { UserModel } from 'src/app/core/models/user-dashboard.model';
 
 @Component({
   selector: 'app-signup',
@@ -91,7 +90,10 @@ export class SignupComponent implements OnInit {
 
   signUp() {
     this.http
-      .post<User>('http://localhost:3000/signupUsers', this.signUpForm.value)
+      .post<UserModel>(
+        'http://localhost:3000/signupUsers',
+        this.signUpForm.value
+      )
       .subscribe(
         (res) => {
           this.stateAlert = 'SS'; // SignUp Successful

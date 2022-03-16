@@ -8,6 +8,7 @@ import { FormGroup } from '@angular/forms';
 
 import { AuthguardService } from '../../core/guard-service/authguard.service';
 import { SnackbarAlertService } from 'src/app/shared/shared-services/snackbar-alert/snackbar-alert.service';
+import { ApiService } from 'src/app/shared/shared-services/apis/api.service';
 
 @Component({
   selector: 'app-login-page',
@@ -20,6 +21,7 @@ export class LoginPageComponent implements OnInit {
     private router: Router,
     private authService: AuthguardService,
     private _snackBar: SnackbarAlertService,
+    private api: ApiService,
     private http: HttpClient
   ) {}
 
@@ -29,10 +31,8 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
-  hide = true;
-  user = 'true';
   stateAlert: string;
-  cantDelete: string;
+  cantDelete: number;
 
   onSubmit(form: NgForm) {
     this.http.get<any>('http://localhost:3000/posts').subscribe(
@@ -44,15 +44,14 @@ export class LoginPageComponent implements OnInit {
         });
         if (user) {
           form.reset();
-          sessionStorage.setItem('cantDelete', user.id);
           this.router.navigate(['/home-page']);
+          sessionStorage.setItem('loggedInUser', JSON.stringify(user));
+          this.api.userNameSub$.next(user);
           sessionStorage.setItem('isLoggedIn', 'true');
         } else {
           this.stateAlert = 'UDE'; // User doesn't exists!
           this._snackBar.openSnackBar(this.stateAlert);
         }
-
-        // res.next;
       },
       (err) => {
         this.stateAlert = 'SWW'; // Something went wrong

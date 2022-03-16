@@ -44,7 +44,7 @@
         <!-- mobile -->
         <mat-form-field appearance="standard">
           <mat-label>Mobile Number</mat-label>
-          <input matInput formControlName="mobile" type="tel" maxlength="10" required name="mobile" id="mobile"
+          <input matInput formControlName="mobile" type="number" maxlength="10" required name="mobile" id="mobile"
             placeholder="Add Mobile Number">
           <mat-error *ngIf="signUpFormValue.controls['mobile'].errors?.['required']">You must enter your mobile number!
             ⚠️</mat-error>
@@ -71,8 +71,7 @@
       </mat-form-field>
 
       <button mat-raised-button color="primary" type="submit" class="btn-margin"
-        [disabled]="!signUpFormValue.valid">Sign
-        Up</button>
+        [disabled]="!signUpFormValue.valid">Sign Up</button>
 
       <div class="btn-margin">
         Already User?

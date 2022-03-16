@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { UserModel } from '../../core/models/user-dashboard.model';
@@ -31,6 +31,7 @@ export class HomePageComponent implements OnInit {
   loading: boolean = true;
   cantDelete: number;
   dialogRef: MatDialogRef<DeleteConfirmationDialogComponent>;
+  loggedInUser: string;
 
   displayedColumns: string[] = [
     'id',
@@ -107,7 +108,8 @@ export class HomePageComponent implements OnInit {
   }
 
   openConfirmationDialog(row: UserModel) {
-    this.cantDelete = JSON.parse(sessionStorage.getItem('cantDelete') || '{}');
+    this.loggedInUser = sessionStorage.getItem('loggedInUser') || '{}';
+    this.cantDelete = JSON.parse(this.loggedInUser).id;
     if (row.id === this.cantDelete) {
       this.stateAlert = 'CDU'; // User Deleted
       this._snackBar.openSnackBar(this.stateAlert);
