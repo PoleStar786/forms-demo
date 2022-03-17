@@ -13,7 +13,7 @@
         <mat-form-field appearance="standard">
           <mat-label>First Name</mat-label>
           <input matInput formControlName="firstName" type="text" required name="firstName" id="firstName"
-            autocomplete="off" placeholder="Add First Name">
+            autocomplete="off" placeholder="Add First Name" title="Enter your First Name">
           <mat-error *ngIf="signUpFormValue.controls['firstName'].errors?.['required']">You must enter your firstname!
             ⚠️</mat-error>
         </mat-form-field>
@@ -22,7 +22,7 @@
         <mat-form-field appearance="standard">
           <mat-label>Last Name</mat-label>
           <input matInput formControlName="lastName" type="text" required name="lastName" id="lastName"
-            placeholder="Add Last Name">
+            placeholder="Add Last Name" title="Enter your Last Name">
           <mat-error *ngIf="signUpFormValue.controls['lastName'].errors?.['required']">You must enter your lastname! ⚠️
           </mat-error>
         </mat-form-field>
@@ -33,7 +33,7 @@
         <mat-form-field appearance="standard">
           <mat-label>Age</mat-label>
           <input matInput formControlName="age" type="text" required maxlength="3" name="age" id="age"
-            placeholder="Add Full Name">
+            placeholder="Add Full Name" title="Enter your Age">
           <mat-error *ngIf="signUpFormValue.controls['age'].errors?.['required']">You must enter your age! ⚠️
           </mat-error>
           <mat-error *ngIf="signUpFormValue.controls['age'].errors?.['pattern']">
@@ -44,8 +44,8 @@
         <!-- mobile -->
         <mat-form-field appearance="standard">
           <mat-label>Mobile Number</mat-label>
-          <input matInput formControlName="mobile" type="number" maxlength="10" required name="mobile" id="mobile"
-            placeholder="Add Mobile Number">
+          <input matInput formControlName="mobile" type="tel" (keypress)="onlyDigits($event)" maxlength="10" required
+            name="mobile" id="mobile" placeholder="Add Mobile Number" title="Enter your Mobile Number">
           <mat-error *ngIf="signUpFormValue.controls['mobile'].errors?.['required']">You must enter your mobile number!
             ⚠️</mat-error>
           <mat-error *ngIf="signUpFormValue.controls['mobile'].errors?.['pattern']">Please, Enter digits only! ⚠️
@@ -56,7 +56,8 @@
       <!-- email -->
       <mat-form-field appearance="standard">
         <mat-label>E-mail ID</mat-label>
-        <input matInput formControlName="email" type="email" name="email" id="email" placeholder="Add E-mail">
+        <input matInput formControlName="email" type="email" name="email" id="email" placeholder="Add E-mail"
+          title="Enter your E-mail">
         <mat-error *ngIf="signUpFormValue.controls['email'].errors?.['required']">You must enter your E-mail! ⚠️
         </mat-error>
         <mat-error *ngIf="signUpFormValue.controls['email'].errors?.['email']">Not a valid E-mail! ⚠️</mat-error>
@@ -65,17 +66,18 @@
       <!-- password -->
       <mat-form-field appearance="standard">
         <mat-label>Password</mat-label>
-        <input matInput formControlName="password" type="text" required name="password" id="password">
+        <input matInput formControlName="password" type="text" required name="password" id="password"
+          title="Enter your Password">
         <mat-error *ngIf="signUpFormValue.controls['password'].errors?.['required']">You must enter your Password! ⚠️
         </mat-error>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit" class="btn-margin"
-        [disabled]="!signUpFormValue.valid">Sign Up</button>
+      <button mat-raised-button color="primary" type="submit" class="btn-margin" [disabled]="!signUpFormValue.valid"
+        title="Sign Up">Sign Up</button>
 
       <div class="btn-margin">
         Already User?
-        <a (click)="goToLogin()" class="btn-signup">Login</a>
+        <a (click)="goToLogin()" class="btn-signup" title="Go to Login">Login</a>
       </div>
     </mat-card>
   </form>

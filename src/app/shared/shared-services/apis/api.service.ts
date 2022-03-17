@@ -10,6 +10,7 @@ import { Subject, BehaviorSubject } from 'rxjs';
 export class ApiService {
   public userNameSub$ = new Subject<UserModel>();
   public toggleHF = new BehaviorSubject<boolean>(false);
+  public toggleView$ = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {}
 

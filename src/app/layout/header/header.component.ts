@@ -12,8 +12,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   loggedInUser: string = sessionStorage.getItem('loggedInUser') || '{}';
   loggedUserName: string = JSON.parse(this.loggedInUser).firstName;
   loggedUserUnsubscribe: Subscription;
+  isChecked = true;
 
   constructor(private router: Router, private api: ApiService) {}
+
+  toggleView() {
+    this.api.toggleView$.next(this.isChecked);
+    // sessionStorage.setItem('toggleView', this.isChecked + '');
+    // console.log(this.api.toggleView$);
+  }
 
   logout() {
     sessionStorage.clear();

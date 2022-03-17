@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
-import { AuthenticationModule } from './auth/authentication.module';
-import { FeaturesModule } from './layout/features.module';
-import { MaterialModule } from './shared/material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
+import { AuthenticationModule } from './auth/authentication/authentication.module';
+import { MaterialModule } from './shared/material/material.module';
+import { FeaturesModule } from './layout/features/features.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FeaturesModule,
     MaterialModule,
     FlexLayoutModule,
+    MatSidenavModule,
   ],
   exports: [MaterialModule],
   providers: [],

@@ -22,6 +22,12 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
+  constructor(
+    private api: ApiService,
+    private _snackBar: SnackbarAlertService,
+    public dialogBox: MatDialog
+  ) {}
+
   formValue: FormGroup;
   userModelObj: UserModel = new UserModel();
   userData: any;
@@ -32,6 +38,7 @@ export class HomePageComponent implements OnInit {
   cantDelete: number;
   dialogRef: MatDialogRef<DeleteConfirmationDialogComponent>;
   loggedInUser: string;
+  isChecked: boolean;
 
   displayedColumns: string[] = [
     'id',
@@ -44,16 +51,11 @@ export class HomePageComponent implements OnInit {
   ];
   dataSource: any;
 
-  constructor(
-    private api: ApiService,
-    private _snackBar: SnackbarAlertService,
-    public dialogBox: MatDialog
-  ) {}
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
     this.getUsers();
+    this.api.toggleView$.subscribe((v) => (this.isChecked = v));
 
     /* Operators */
     /* pipeable operators */
@@ -74,11 +76,11 @@ export class HomePageComponent implements OnInit {
     takeFourNumbers.subscribe((x) => console.log(`Next: ${x}`)); */
   }
 
-  toggleButton() {
-    this.formValue.reset();
-    this.showAdd = true;
-    this.showUpdate = false;
-  }
+  // toggleButton() {
+  //   this.formValue.reset();
+  //   this.showAdd = true;
+  //   this.showUpdate = false;
+  // }
 
   getUsers() {
     this.api.getUser().subscribe({
@@ -115,6 +117,7 @@ export class HomePageComponent implements OnInit {
       this._snackBar.openSnackBar(this.stateAlert);
     } else {
       this.dialogRef = this.dialogBox.open(DeleteConfirmationDialogComponent, {
+        width: '45%',
         disableClose: false,
       });
       this.dialogRef.componentInstance.confirmMessage =
@@ -131,7 +134,7 @@ export class HomePageComponent implements OnInit {
 
   editUser(row: UserModel) {
     this.dialogBox.open(EditFormComponent, {
-      width: '50%',
+      width: 'auto',
       data: row,
     });
     this.userModelObj.id = row.id;

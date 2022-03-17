@@ -1,7 +1,15 @@
  <mat-toolbar color="primary" class="toolbar-class">
-   <span>🎉 Welcome,</span>
-   <small class="ms-3"> {{loggedUserName}} </small>
+   <span class="custom-style-class font-effect-fire">
+     🎉 Welcome,
+     <small class="ms-3"> {{loggedUserName}} </small>
+   </span>
    <span class="example-spacer"></span>
+   <small class="me-1 custom-font">
+     Toggle the View:
+   </small>
+   <mat-slide-toggle [(ngModel)]="isChecked" (click)="toggleView()" class="me-3" title="Toggle the View">
+   </mat-slide-toggle>
+
    <button mat-raised-button color="warn" title="logout" (click)="logout()">
      <i class="material-icons">logout</i></button>
  </mat-toolbar>

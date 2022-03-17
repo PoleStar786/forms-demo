@@ -17,6 +17,10 @@ import { ApiService } from 'src/app/shared/shared-services/apis/api.service';
 })
 export class LoginPageComponent implements OnInit {
   public loginForm!: FormGroup;
+
+  stateAlert: string;
+  cantDelete: number;
+
   constructor(
     private router: Router,
     private authService: AuthguardService,
@@ -30,9 +34,6 @@ export class LoginPageComponent implements OnInit {
       this.router.navigate(['/home-page']);
     }
   }
-
-  stateAlert: string;
-  cantDelete: number;
 
   onSubmit(form: NgForm) {
     this.http.get<any>('http://localhost:3000/posts').subscribe(

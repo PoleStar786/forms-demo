@@ -20,7 +20,7 @@ table {
   // width: 310px;
   // max-width: 400px;
   margin: 10px;
-  background-color: #f6f6f6;
+  background-color: #fdfaf6;
 }
 
 ::ng-deep .success-snackbar {
@@ -46,11 +46,16 @@ table {
 }
 
 /* edit-form */
-.custom-card {
-  max-width: 497px;
-  display: flex;
-  flex-direction: column;
-  background-color: #eeeeee;
+// ::ng-deep .custom-card {
+//   background-color: #FDFAF6;
+//   max-width: 500px !important;
+//   width: 440px !important;
+// }
+
+::ng-deep .mat-dialog-container {
+  background-color: #fdfaf6;
+  max-width: 600px !important;
+  width: 440px !important;
 }
 
 .mat-card:not([class*="mat-elevation-z"]) {

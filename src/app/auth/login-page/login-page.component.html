@@ -48,7 +48,7 @@
 
 
 <div class="position-class">
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="on">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
 
     <mat-card class="example-card">
       <mat-card-title>
@@ -57,7 +57,8 @@
 
       <mat-form-field appearance="standard">
         <mat-label>E-mail</mat-label>
-        <input matInput required ngModel name="email" [email]="true" id="email" #email="ngModel" placeholder="E-mail">
+        <input matInput required ngModel name="email" [email]="true" id="email" #email="ngModel" placeholder="E-mail"
+          autocomplete="on" title="Enter your E-mail">
       </mat-form-field>
       <span
         *ngIf="loginForm.controls['email']?.invalid && (loginForm.controls['email']?.dirty || loginForm.controls['email']?.touched)">
@@ -68,7 +69,8 @@
 
       <mat-form-field appearance="standard">
         <mat-label>Password</mat-label>
-        <input matInput required ngModel name="password" id="password" #password="ngModel" placeholder="Password">
+        <input matInput required ngModel name="password" id="password" #password="ngModel" placeholder="Password"
+          autocomplete="off" title="Enter your Password">
       </mat-form-field>
       <span
         *ngIf="loginForm.controls['password']?.invalid && (loginForm.controls['password']?.dirty || loginForm.controls['password']?.touched)">
@@ -76,12 +78,12 @@
         </mat-error>
       </span>
 
-      <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid"
-        class="btn-margin">Login</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid" class="btn-margin"
+        title="Login">Login</button>
 
       <div class="btn-margin">
         New User?
-        <a (click)="goToSignUp()" class="btn-signup">Sign Up</a>
+        <a (click)="goToSignUp()" class="btn-signup" title="Go to Sign Up">Sign Up</a>
       </div>
     </mat-card>
   </form>

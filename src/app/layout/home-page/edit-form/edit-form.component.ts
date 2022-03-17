@@ -48,6 +48,12 @@ export class EditFormComponent implements OnInit {
     }
   }
 
+  onlyDigits(event: { charCode: number }) {
+    return event.charCode == 8 || event.charCode == 0
+      ? null
+      : event.charCode >= 48 && event.charCode <= 57;
+  }
+
   updateUser() {
     this.editData.firstName = this.formValue.value.firstName;
     this.editData.lastName = this.formValue.value.lastName;

@@ -3,7 +3,7 @@
     {
       "firstName": "Avi",
       "lastName": "Manu",
-      "mobile": "2343344354",
+      "mobile": "2343344351",
       "email": "am@mail.com",
       "password": "1234",
       "age": "22",
@@ -21,7 +21,7 @@
     {
       "firstName": "Dhruv",
       "lastName": "Prajapati",
-      "mobile": "6353946090",
+      "mobile": "6353946018",
       "email": "dp@mail.com",
       "password": "1234",
       "age": "22",
@@ -37,12 +37,12 @@
       "id": 4
     },
     {
-      "firstName": "Jacki",
+      "firstName": "Jack",
       "lastName": "Pery",
       "mobile": "9632587410",
       "email": "jp@mail.com",
       "password": "1234",
-      "age": "34",
+      "age": "21",
       "id": 5
     },
     {
@@ -55,13 +55,22 @@
       "id": 6
     },
     {
-      "firstName": "Minnat",
+      "firstName": "Minnal",
       "lastName": "Murli",
       "mobile": "0192836231",
       "email": "mm@mail.com",
       "password": "1234",
       "age": "24",
       "id": 7
+    },
+    {
+      "firstName": "Kanak",
+      "lastName": "Modi",
+      "mobile": "1234321123",
+      "email": "jm@mail.com",
+      "password": "1234",
+      "age": "23",
+      "id": 8
     }
   ],
   "signupUsers": [],
