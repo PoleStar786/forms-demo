@@ -22,6 +22,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
+  tempo: any;
   constructor(
     private api: ApiService,
     private _snackBar: SnackbarAlertService,
@@ -37,8 +38,11 @@ export class HomePageComponent implements OnInit {
   loading: boolean = true;
   cantDelete: number;
   dialogRef: MatDialogRef<DeleteConfirmationDialogComponent>;
-  loggedInUser: string;
+  loggedInUser: string = localStorage.getItem('loggedInUser') || '{}';
+  loggedInUserID: number = JSON.parse(this.loggedInUser).id;
   isChecked: boolean;
+  uData: UserModel[] = [];
+  crewArr = [];
 
   displayedColumns: string[] = [
     'id',
@@ -83,9 +87,21 @@ export class HomePageComponent implements OnInit {
   // }
 
   getUsers() {
-    this.api.getUser().subscribe({
+    this.api.getSubUser().subscribe({
+      // it was getUser(), before...
       next: (res) => {
         this.userData = res;
+        this.crewArr = JSON.parse(this.loggedInUser).crew;
+
+        this.crewArr.map((c) => {
+          this.tempo = this.userData.filter((v: UserModel) => {
+            if (v.id === c) {
+              this.uData.push(v);
+            }
+          });
+        });
+
+        this.userData = this.uData;
         this.dataSource = new MatTableDataSource<UserModel>(this.userData);
         this.dataSource.paginator = this.paginator;
         this.loading = false;
@@ -97,11 +113,22 @@ export class HomePageComponent implements OnInit {
   }
 
   deleteUser(id: number) {
-    this.api.deleteUser(id).subscribe({
+    this.api.deleteSubUser(id).subscribe({
       next: (res) => {
+        const numID = this.crewArr.findIndex((num) => num === id);
+
+        if (numID > -1) {
+          this.crewArr.splice(numID, 1);
+        }
+
+        const tempUser = JSON.parse(this.loggedInUser);
+        tempUser['crew'] = this.crewArr;
+        this.crewArr = this.crewArr;
+
+        localStorage.setItem('loggedInUser', JSON.stringify(tempUser));
+
         this.stateAlert = 'UD'; // User Deleted
         this._snackBar.openSnackBar(this.stateAlert);
-        this.getUsers();
       },
       error: () => {
         'Error occured when deleting User!';
@@ -110,26 +137,25 @@ export class HomePageComponent implements OnInit {
   }
 
   openConfirmationDialog(row: UserModel) {
-    this.loggedInUser = sessionStorage.getItem('loggedInUser') || '{}';
-    this.cantDelete = JSON.parse(this.loggedInUser).id;
-    if (row.id === this.cantDelete) {
-      this.stateAlert = 'CDU'; // User Deleted
-      this._snackBar.openSnackBar(this.stateAlert);
-    } else {
-      this.dialogRef = this.dialogBox.open(DeleteConfirmationDialogComponent, {
-        width: '45%',
-        disableClose: false,
-      });
-      this.dialogRef.componentInstance.confirmMessage =
-        'Are you sure you want to delete? 🤨';
+    // this.cantDelete = this.loggedInUserID;
+    // if (row.id === this.cantDelete) {
+    //   this.stateAlert = 'CDU'; // Cannot Delete Current User
+    //   this._snackBar.openSnackBar(this.stateAlert);
+    // } else {
+    this.dialogRef = this.dialogBox.open(DeleteConfirmationDialogComponent, {
+      width: '45%',
+      disableClose: false,
+    });
+    this.dialogRef.componentInstance.confirmMessage =
+      'Are you sure you want to delete? 🤨';
 
-      this.dialogRef.afterClosed().subscribe((res) => {
-        if (res) {
-          this.deleteUser(row.id);
-        }
-        this.dialogRef.close();
-      });
-    }
+    this.dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.deleteUser(row.id);
+      }
+      this.dialogRef.close();
+    });
+    // }
   }
 
   editUser(row: UserModel) {
@@ -140,3 +166,22 @@ export class HomePageComponent implements OnInit {
     this.userModelObj.id = row.id;
   }
 }
+
+// let crewArr: [] = JSON.parse(this.loggedInUser).crew;
+
+// let storeID = crewArr.filter((e: any) => res.indexOf(e) !== -1);
+// res.map(
+//   (v: any) => v.id === JSON.parse(this.loggedInUser).crew
+// );
+
+// console.log(storeID);
+// res.forEach((element: any) => {
+//   console.log(element);
+// if (element.id === JSON.parse(this.loggedInUser).crew) {
+//   console.log(element.id);
+// } else {
+//   console.log(res.id);
+// }
+// });
+// localStorage.setItem('temp', JSON.stringify(res));
+// console.log(crewArr);

@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 
 import { AuthguardService } from 'src/app/core/guard-service/authguard.service';
 import { SnackbarAlertService } from 'src/app/shared/shared-services/snackbar-alert/snackbar-alert.service';
-import { UserModel } from 'src/app/core/models/user-dashboard.model';
+import { ApiService } from 'src/app/shared/shared-services/apis/api.service';
 
 @Component({
   selector: 'app-fake-signup-page',
@@ -22,10 +21,10 @@ export class FakeSignupPageComponent implements OnInit {
 
   constructor(
     private formbuilder: FormBuilder,
-    private http: HttpClient,
     private router: Router,
     private authService: AuthguardService,
-    private _snackBar: SnackbarAlertService
+    private _snackBar: SnackbarAlertService,
+    private api: ApiService
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +38,7 @@ export class FakeSignupPageComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       age: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      crew: [[]],
     });
 
     if (this.authService.isLoggedIn) {
@@ -53,23 +53,24 @@ export class FakeSignupPageComponent implements OnInit {
   }
 
   signUp() {
-    this.http
-      .post<UserModel>(
-        'http://localhost:3000/posts',
-        this.signUpFormValue.value
-      )
-      .subscribe(
-        (res) => {
-          this.stateAlert = 'SS'; // SignUp Successful
-          this._snackBar.openSnackBar(this.stateAlert);
-          this.signUpFormValue.reset();
-          this.router.navigate(['/login-page']);
-        },
-        (err) => {
-          this.stateAlert = 'SWW'; // Something went wrong
-          this._snackBar.openSnackBar(this.stateAlert);
-        }
-      );
+    // Previously Used method for sign up
+    // this.http
+    //   .post<UserModel>(
+    //     'http://localhost:3000/posts',
+    //     this.signUpFormValue.value
+    //   )
+    this.api.postUser(this.signUpFormValue.value).subscribe(
+      (_res) => {
+        this.stateAlert = 'SS'; // SignUp Successful
+        this._snackBar.openSnackBar(this.stateAlert);
+        this.signUpFormValue.reset();
+        this.router.navigate(['/login-page']);
+      },
+      (_err) => {
+        this.stateAlert = 'SWW'; // Something went wrong
+        this._snackBar.openSnackBar(this.stateAlert);
+      }
+    );
   }
 
   goToLogin() {

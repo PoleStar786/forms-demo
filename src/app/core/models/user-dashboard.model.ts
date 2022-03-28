@@ -5,4 +5,5 @@ export class UserModel {
   email: string;
   mobile: number;
   age: number;
+  crew: number[];
 }

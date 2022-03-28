@@ -36,33 +36,40 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.http.get<any>('http://localhost:3000/posts').subscribe(
-      (res) => {
-        const user = res.find((a: User) => {
-          return (
-            a.email === form.value.email && a.password === form.value.password
-          );
-        });
-        if (user) {
-          form.reset();
-          this.router.navigate(['/home-page']);
-          sessionStorage.setItem('loggedInUser', JSON.stringify(user));
-          this.api.userNameSub$.next(user);
-          sessionStorage.setItem('isLoggedIn', 'true');
-        } else {
-          this.stateAlert = 'UDE'; // User doesn't exists!
+    this.http
+      .get<any>('http://localhost:3000/posts')
+      // this.api.getUser()
+      .subscribe(
+        (res) => {
+          const user = res.find((a: User) => {
+            return (
+              a.email === form.value.email && a.password === form.value.password
+            );
+          });
+          if (user) {
+            form.reset();
+            this.router.navigate(['/home-page']);
+
+            localStorage.setItem('loggedInUser', JSON.stringify(user));
+            this.api.userNameSub$.next(user);
+
+            localStorage.setItem('isLoggedIn', 'true');
+
+            // this.getUsers();
+          } else {
+            this.stateAlert = 'UDE'; // User doesn't exists!
+            this._snackBar.openSnackBar(this.stateAlert);
+          }
+        },
+        (err) => {
+          this.stateAlert = 'SWW'; // Something went wrong
           this._snackBar.openSnackBar(this.stateAlert);
         }
-      },
-      (err) => {
-        this.stateAlert = 'SWW'; // Something went wrong
-        this._snackBar.openSnackBar(this.stateAlert);
-      }
-    );
+      );
 
     // if (this.accounts.some((el) => el.username === form.value.username)) {
     //   this.router.navigate(['/home-page']);
-    //   sessionStorage.setItem('isLoggedIn', 'true');
+    //   localStorage.setItem('isLoggedIn', 'true');
     // } else {
     //   this.openSnackBarOnFailure();
     // }
@@ -82,6 +89,11 @@ export class LoginPageComponent implements OnInit {
     // console.log(status);
     // if(user.username === this.accounts[]){}
   }
+
+  // getUsers() {
+  //   console.log('running......');
+  //   this.api.getSubUser();
+  // }
 
   goToSignUp() {
     this.router.navigate(['/signup-page']);
@@ -110,7 +122,7 @@ export class LoginPageComponent implements OnInit {
 //         alert('Login Success');
 //         this.loginForm.reset();
 //         this.router.navigate(['/home-page']);
-//         sessionStorage.setItem('isLoggedIn', 'true');
+//         localStorage.setItem('isLoggedIn', 'true');
 //       } else {
 //         alert('Login failed.');
 //       }

@@ -8,7 +8,7 @@ export class AuthguardService {
   constructor(private api: ApiService) {}
 
   getToken() {
-    this.isLoggedIn = !!sessionStorage.getItem('isLoggedIn');
+    this.isLoggedIn = !!localStorage.getItem('isLoggedIn');
     this.api.toggleHF.next(this.isLoggedIn);
     return this.isLoggedIn;
   }

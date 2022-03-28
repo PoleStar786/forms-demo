@@ -3,27 +3,34 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from 'src/app/shared/shared-services/apis/api.service';
 import { Subscription } from 'rxjs';
 
+import { MatDialog } from '@angular/material/dialog';
+import { SignupComponent } from 'src/app/auth/signup/signup.component';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  loggedInUser: string = sessionStorage.getItem('loggedInUser') || '{}';
+  loggedInUser: string = localStorage.getItem('loggedInUser') || '{}';
   loggedUserName: string = JSON.parse(this.loggedInUser).firstName;
   loggedUserUnsubscribe: Subscription;
   isChecked = true;
 
-  constructor(private router: Router, private api: ApiService) {}
+  constructor(
+    private router: Router,
+    private api: ApiService,
+    public dialogBox: MatDialog
+  ) {}
 
   toggleView() {
     this.api.toggleView$.next(this.isChecked);
-    // sessionStorage.setItem('toggleView', this.isChecked + '');
+    // localStorage.setItem('toggleView', this.isChecked + '');
     // console.log(this.api.toggleView$);
   }
 
   logout() {
-    sessionStorage.clear();
+    localStorage.clear();
     this.router.navigate(['login-page']);
   }
 
@@ -35,5 +42,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.loggedUserUnsubscribe.unsubscribe();
+  }
+
+  addNewUser() {
+    this.dialogBox.open(SignupComponent, {
+      width: 'auto',
+    });
   }
 }

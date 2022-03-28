@@ -1,10 +1,11 @@
-import { SnackbarAlertService } from 'src/app/shared/shared-services/snackbar-alert/snackbar-alert.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserModel } from 'src/app/core/models/user-dashboard.model';
+
 import { ApiService } from 'src/app/shared/shared-services/apis/api.service';
+import { SnackbarAlertService } from 'src/app/shared/shared-services/snackbar-alert/snackbar-alert.service';
 
 @Component({
   selector: 'app-edit-form',
@@ -61,14 +62,14 @@ export class EditFormComponent implements OnInit {
     this.editData.mobile = this.formValue.value.mobile;
     this.editData.age = this.formValue.value.age;
 
-    this.api.updateUser(this.editData, this.editData.id).subscribe({
-      next: (res) => {
+    this.api.updateSubUser(this.editData, this.editData.id).subscribe({
+      next: (_res) => {
         if (
-          JSON.parse(sessionStorage.getItem('loggedInUser') || '{}').id ===
+          JSON.parse(localStorage.getItem('loggedInUser') || '{}').id ===
           this.editData.id
         ) {
           this.api.userNameSub$.next(this.editData);
-          sessionStorage.setItem('loggedInUser', JSON.stringify(this.editData));
+          localStorage.setItem('loggedInUser', JSON.stringify(this.editData));
         }
 
         this.stateAlert = 'DUS'; // Data Updated Successfully

@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 
-import { AuthguardService } from 'src/app/core/guard-service/authguard.service';
 import { SnackbarAlertService } from 'src/app/shared/shared-services/snackbar-alert/snackbar-alert.service';
 import { UserModel } from 'src/app/core/models/user-dashboard.model';
+import { ApiService } from 'src/app/shared/shared-services/apis/api.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,100 +14,73 @@ import { UserModel } from 'src/app/core/models/user-dashboard.model';
 export class SignupComponent implements OnInit {
   hide: boolean = true;
   stateAlert: string;
+  crew: number[] = [];
+
+  loggedUser: string = localStorage.getItem('loggedInUser') || '{}';
+  loggedUserID: number = JSON.parse(this.loggedUser).id;
 
   public signUpForm: FormGroup;
 
   constructor(
     private formbuilder: FormBuilder,
-    private http: HttpClient,
-    private router: Router,
-    private authService: AuthguardService,
-    private _snackBar: SnackbarAlertService
+    private _snackBar: SnackbarAlertService,
+    @Inject(MAT_DIALOG_DATA) public editData: UserModel,
+    public dialogRef: MatDialogRef<SignupComponent>,
+    private api: ApiService
   ) {}
 
   ngOnInit(): void {
     this.signUpForm = this.formbuilder.group({
-      fullName: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       mobile: [
         '',
-        [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
-        ],
+        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
       ],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
+      age: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
     });
-
-    if (this.authService.isLoggedIn) {
-      this.router.navigate(['/home-page']);
-    }
   }
 
-  get fullName() {
-    return this.signUpForm.get('fullName');
+  onlyDigits(event: { charCode: number }) {
+    return event.charCode == 8 || event.charCode == 0
+      ? null
+      : event.charCode >= 48 && event.charCode <= 57;
   }
 
-  get email() {
-    return this.signUpForm.get('email');
-  }
+  addCrew() {
+    // this.http.post<UserModel>('http://localhost:3000/subUsers', this.signUpForm.value)
+    this.api.postSubUser(this.signUpForm.value).subscribe(
+      (res) => {
+        this.crew.push(res.id);
 
-  get mobile() {
-    return this.signUpForm.get('mobile');
-  }
+        // this.loggedUser['crew'] = ;
+        // JSON.parse(this.loggedUser)['crew'];
+        let temp = JSON.parse(this.loggedUser);
 
-  get password() {
-    return this.signUpForm.get('password');
-  }
-
-  getErrorMessageFullname() {
-    return 'You must enter full name!';
-  }
-
-  getErrorMessageEmail() {
-    if (this.email?.hasError('required')) {
-      return 'You must enter E-mail!';
-    }
-
-    return this.email?.hasError('email') ? 'Not a valid E-mail!' : '';
-  }
-
-  getErrorMessageMobile() {
-    if (this.mobile?.hasError('required')) {
-      return 'You must enter mobile number!';
-    } else if (this.mobile?.hasError('minlength')) {
-      return 'Enter 10 digit number!';
-    }
-
-    return this.mobile?.hasError('pattern') ? 'Please, Enter digits only!' : '';
-  }
-
-  getErrorMessagePassword() {
-    return 'You must enter password!';
-  }
-
-  signUp() {
-    this.http
-      .post<UserModel>(
-        'http://localhost:3000/signupUsers',
-        this.signUpForm.value
-      )
-      .subscribe(
-        (res) => {
-          this.stateAlert = 'SS'; // SignUp Successful
-          this._snackBar.openSnackBar(this.stateAlert);
-          this.signUpForm.reset();
-          this.router.navigate(['/login-page']);
-        },
-        (err) => {
-          this.stateAlert = 'SWW'; // Something went wrong
-          this._snackBar.openSnackBar(this.stateAlert);
+        if (temp.crew.length < 0) {
+          temp['crew'] = this.crew;
+        } else {
+          temp['crew'].push(res.id);
         }
-      );
-  }
 
-  goToLogin() {
-    this.router.navigate(['/login-page']);
+        // set added userID to localstorage
+        localStorage.setItem('loggedInUser', JSON.stringify(temp));
+
+        // set added userID to json-server
+        this.api.postID(this.loggedUserID, temp).subscribe((_rex) => {});
+
+        this.stateAlert = 'SS'; // SignUp Successful
+        this._snackBar.openSnackBar(this.stateAlert);
+        this.signUpForm.reset();
+
+        location.reload();
+      },
+      (err) => {
+        this.stateAlert = 'SWW'; // Something went wrong
+        this._snackBar.openSnackBar(this.stateAlert);
+      }
+    );
   }
 }
