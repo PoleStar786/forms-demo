@@ -11,6 +11,7 @@ export class ApiService {
   public userNameSub$ = new Subject<UserModel>();
   public toggleHF = new BehaviorSubject<boolean>(false);
   public toggleView$ = new BehaviorSubject<boolean>(false);
+  public addCrew$ = new Subject<any>();
 
   loggedInUser: string = localStorage.getItem('loggedInUser') || '{}';
   uData: UserModel[] = [];

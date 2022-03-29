@@ -58,8 +58,15 @@ export class HomePageComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
+    this.crewArr = JSON.parse(this.loggedInUser).crew;
+
     this.getUsers();
     this.api.toggleView$.subscribe((v) => (this.isChecked = v));
+
+    this.api.addCrew$.subscribe((res) => {
+      this.getUsers();
+      this.crewArr = res.crew;
+    });
 
     /* Operators */
     /* pipeable operators */
@@ -80,21 +87,15 @@ export class HomePageComponent implements OnInit {
     takeFourNumbers.subscribe((x) => console.log(`Next: ${x}`)); */
   }
 
-  // toggleButton() {
-  //   this.formValue.reset();
-  //   this.showAdd = true;
-  //   this.showUpdate = false;
-  // }
-
   getUsers() {
     this.api.getSubUser().subscribe({
-      // it was getUser(), before...
+      // before... it was getUser(),
       next: (res) => {
         this.userData = res;
-        this.crewArr = JSON.parse(this.loggedInUser).crew;
+        this.uData = [];
 
-        this.crewArr.map((c) => {
-          this.tempo = this.userData.filter((v: UserModel) => {
+        this.crewArr.forEach((c) => {
+          this.userData.filter((v: UserModel) => {
             if (v.id === c) {
               this.uData.push(v);
             }
@@ -114,7 +115,7 @@ export class HomePageComponent implements OnInit {
 
   deleteUser(id: number) {
     this.api.deleteSubUser(id).subscribe({
-      next: (res) => {
+      next: (_res) => {
         const numID = this.crewArr.findIndex((num) => num === id);
 
         if (numID > -1) {
@@ -129,6 +130,7 @@ export class HomePageComponent implements OnInit {
 
         this.stateAlert = 'UD'; // User Deleted
         this._snackBar.openSnackBar(this.stateAlert);
+        this.getUsers();
       },
       error: () => {
         'Error occured when deleting User!';
@@ -166,22 +168,3 @@ export class HomePageComponent implements OnInit {
     this.userModelObj.id = row.id;
   }
 }
-
-// let crewArr: [] = JSON.parse(this.loggedInUser).crew;
-
-// let storeID = crewArr.filter((e: any) => res.indexOf(e) !== -1);
-// res.map(
-//   (v: any) => v.id === JSON.parse(this.loggedInUser).crew
-// );
-
-// console.log(storeID);
-// res.forEach((element: any) => {
-//   console.log(element);
-// if (element.id === JSON.parse(this.loggedInUser).crew) {
-//   console.log(element.id);
-// } else {
-//   console.log(res.id);
-// }
-// });
-// localStorage.setItem('temp', JSON.stringify(res));
-// console.log(crewArr);

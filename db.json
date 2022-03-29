@@ -28,9 +28,8 @@
       "password": "1234",
       "age": "21",
       "crew": [
-        8,
-        9,
-        11
+        5,
+        7
       ],
       "id": 3
     },
@@ -93,10 +92,8 @@
       "crew": [
         1,
         2,
-        3,
-        4,
-        5,
-        10
+        6,
+        8
       ],
       "id": 9
     }
@@ -113,75 +110,48 @@
     },
     {
       "firstName": "sasha",
-      "lastName": "mitra",
+      "lastName": "loenheart",
       "mobile": "1112221112",
-      "email": "sm@mail.com",
+      "email": "sl@mail.com",
       "password": "121",
       "age": "19",
       "id": 2
     },
     {
-      "firstName": "mena",
-      "lastName": "bhojak",
-      "mobile": "0203040506",
-      "email": "mbhojak@mail.com",
+      "firstName": "Aarush",
+      "lastName": "Sehgal",
+      "mobile": "3265987410",
+      "email": "2018095900007597@spu.ac.in",
       "password": "1",
-      "age": "21",
-      "id": 3
-    },
-    {
-      "firstName": "madan",
-      "lastName": "mohan",
-      "mobile": "0101010101",
-      "email": "mmohan@mail.com",
-      "password": "1",
-      "age": "78",
+      "age": "12",
       "id": 4
     },
     {
-      "firstName": "aa",
-      "lastName": "mm",
-      "mobile": "0902393593",
-      "email": "mama@mail.com",
+      "firstName": "Aarush",
+      "lastName": "Sehgal",
+      "mobile": "3265987410",
+      "email": "2018095900007597@spu.ac.in",
       "password": "1",
-      "age": "23",
+      "age": "12",
       "id": 5
     },
     {
-      "firstName": "manish",
-      "lastName": "jha",
-      "mobile": "1212121212",
-      "email": "mj@mail.com",
+      "firstName": "Jay",
+      "lastName": "Sinha",
+      "mobile": "1232112321",
+      "email": "fd@sd",
       "password": "1",
-      "age": "12",
-      "id": 8
+      "age": "332",
+      "id": 6
     },
     {
-      "firstName": "meet",
-      "lastName": "pokhar",
-      "mobile": "1231231231",
-      "email": "mp@mail.com",
-      "password": "1",
-      "age": "122",
-      "id": 9
-    },
-    {
-      "firstName": "munna",
-      "lastName": "bhai",
-      "mobile": "1029385347",
-      "email": "mb@mail.com",
-      "password": "1",
-      "age": "34",
-      "id": 10
-    },
-    {
-      "firstName": "Navya",
-      "lastName": "Mehta",
-      "mobile": "1232123234",
-      "email": "nm@mail.com",
-      "password": "1",
-      "age": "23",
-      "id": 11
+      "firstName": "Dhruv",
+      "lastName": "Prajapati",
+      "mobile": "6353946018",
+      "email": "prajapatidhruv1110@gmail.com",
+      "password": "123",
+      "age": "11",
+      "id": 7
     }
   ],
   "profile": {

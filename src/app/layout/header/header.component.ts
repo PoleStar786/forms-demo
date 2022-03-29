@@ -25,8 +25,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toggleView() {
     this.api.toggleView$.next(this.isChecked);
-    // localStorage.setItem('toggleView', this.isChecked + '');
-    // console.log(this.api.toggleView$);
   }
 
   logout() {

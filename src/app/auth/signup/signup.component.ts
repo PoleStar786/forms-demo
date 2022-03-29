@@ -69,13 +69,12 @@ export class SignupComponent implements OnInit {
         localStorage.setItem('loggedInUser', JSON.stringify(temp));
 
         // set added userID to json-server
-        this.api.postID(this.loggedUserID, temp).subscribe((_rex) => {});
+        this.api.postID(this.loggedUserID, temp).subscribe(() => {});
 
         this.stateAlert = 'SS'; // SignUp Successful
         this._snackBar.openSnackBar(this.stateAlert);
         this.signUpForm.reset();
-
-        location.reload();
+        this.api.addCrew$.next(temp);
       },
       (err) => {
         this.stateAlert = 'SWW'; // Something went wrong
