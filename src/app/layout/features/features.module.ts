@@ -12,6 +12,9 @@ import { HeaderComponent } from './../header/header.component';
 import { FooterComponent } from './../footer/footer.component';
 import { HomePageComponent } from './../home-page/home-page.component';
 import { FeaturesRoutingModule } from './features-routing.module';
+import { UserDetailsPageComponent } from '../user-details-page/user-details-page.component';
+import { DtableComponent } from '../user-details-page/dtable/dtable.component';
+import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { FeaturesRoutingModule } from './features-routing.module';
     PageNotFoundComponent,
     DeleteConfirmationDialogComponent,
     EditFormComponent,
+    UserDetailsPageComponent,
+    DtableComponent,
+    SidenavComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +43,9 @@ import { FeaturesRoutingModule } from './features-routing.module';
     PageNotFoundComponent,
     DeleteConfirmationDialogComponent,
     EditFormComponent,
+    UserDetailsPageComponent,
+    DtableComponent,
+    SidenavComponent,
   ],
 })
 export class FeaturesModule {}

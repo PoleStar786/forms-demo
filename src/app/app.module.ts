@@ -7,11 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { AuthenticationModule } from './auth/authentication/authentication.module';
 import { MaterialModule } from './shared/material/material.module';
 import { FeaturesModule } from './layout/features/features.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [AppComponent],

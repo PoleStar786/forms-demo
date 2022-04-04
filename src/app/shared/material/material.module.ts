@@ -14,6 +14,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [],
@@ -32,6 +34,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
+    MatTabsModule,
+    MatSortModule,
   ],
   exports: [
     MatToolbarModule,
@@ -47,6 +51,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
+    MatTabsModule,
+    MatSortModule,
   ],
 })
 export class MaterialModule {}

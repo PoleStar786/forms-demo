@@ -1,8 +1,10 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
 .footer-main {
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 1;
 }

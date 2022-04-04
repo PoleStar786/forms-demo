@@ -32,6 +32,12 @@ const routes: Routes = [
       import('./layout/features/features.module').then((i) => i.FeaturesModule),
     canActivate: [AuthenticationGuard],
   },
+  {
+    path: 'user-details-page',
+    loadChildren: () =>
+      import('./layout/features/features.module').then((i) => i.FeaturesModule),
+    canActivate: [AuthenticationGuard],
+  },
   { path: '**', component: PageNotFoundComponent },
 ];
 

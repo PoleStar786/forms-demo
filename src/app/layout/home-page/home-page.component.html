@@ -31,8 +31,8 @@
 
   <div *ngIf="!isChecked">
     <!-- User Data in material Table -->
-    <div class="container">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="background-color: #FDFAF6;">
+    <div class="container" style="min-width: 90%;">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 custom-table">
 
         <!-- ID -->
         <ng-container matColumnDef="id">
@@ -90,39 +90,8 @@
       </table>
 
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="10" showFirstLastButtons
-        aria-label="Select page of users" style="background-color: #FDFAF6;">
+        aria-label="Select page of users" class="custom-table">
       </mat-paginator>
     </div>
   </div>
 </div>
-
-<!-- User Data in bootstrap Table -->
-<!-- <table class="table mt-3">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">First Name</th>
-      <th scope="col">Last Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Mobile no.</th>
-      <th scope="col">Age</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr *ngFor="let row of userData">
-      <td> {{row.id}} </td>
-      <td> {{row.firstName}} </td>
-      <td> {{row.lastName}} </td>
-      <td> {{row.email}} </td>
-      <td> {{row.mobile}} </td>
-      <td> {{row.age}} </td>
-      <td>
-        <button mat-flat-button color="primary" (click)="editUser(row)" type="button" data-bs-toggle="modal"
-          data-bs-target="#exampleModal">Edit</button>
-        <button mat-flat-button color="warn" (click)="deleteUser(row)" class="mx-1">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table> -->

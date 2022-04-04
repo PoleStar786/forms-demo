@@ -105,6 +105,7 @@ export class HomePageComponent implements OnInit {
         this.userData = this.uData;
         this.dataSource = new MatTableDataSource<UserModel>(this.userData);
         this.dataSource.paginator = this.paginator;
+
         this.loading = false;
       },
       error: () => {

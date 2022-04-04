@@ -1,0 +1,13 @@
+<div class="extra-padding buttonWrapper">
+  &nbsp;
+  <button class="tab-button" data-id="firstTable" type="button" (click)="firstTableView()">FirstTable</button>
+  &nbsp;
+  <button class="tab-button" data-id="secondTable" type="button" (click)="secondTableView()">Second Table</button>
+  &nbsp;
+  <button class="tab-button" data-id="thirdTable" type="button" (click)="thirdTableView()">Third Table</button>
+</div>
+
+<div>
+  <app-dtable *ngIf="tableColumns" [tableColumns]="tableColumns" [tableData]="tableData">
+  </app-dtable>
+</div>

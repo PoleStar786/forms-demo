@@ -14,6 +14,7 @@ import { SignupComponent } from 'src/app/auth/signup/signup.component';
 export class HeaderComponent implements OnInit, OnDestroy {
   loggedInUser: string = localStorage.getItem('loggedInUser') || '{}';
   loggedUserName: string = JSON.parse(this.loggedInUser).firstName;
+
   loggedUserUnsubscribe: Subscription;
   isChecked = true;
 
@@ -46,5 +47,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.dialogBox.open(SignupComponent, {
       width: 'auto',
     });
+  }
+
+  goToUserDetails() {
+    this.router.navigate(['/user-details-page/users-table']);
   }
 }
