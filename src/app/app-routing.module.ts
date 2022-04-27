@@ -6,12 +6,16 @@ import { AuthenticationGuard } from './core/guard/authentication.guard';
 import { LoginPageComponent } from './auth/login-page/login-page.component';
 import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.component';
 
-// import { HomePageComponent } from './layout/home-page/home-page.component';
-// import { FakeSignupPageComponent } from './auth/fake-signup-page/fake-signup-page.component';
-
 const routes: Routes = [
   { path: '', redirectTo: '/login-page', pathMatch: 'full' },
   { path: 'login-page', component: LoginPageComponent },
+  {
+    path: 'fake',
+    loadChildren: () =>
+      import('./auth/authentication/authentication.module').then(
+        (i) => i.AuthenticationModule
+      ),
+  },
   {
     path: 'signup-page',
     loadChildren: () =>
@@ -22,7 +26,6 @@ const routes: Routes = [
   },
   {
     path: 'fake-page',
-
     component: SignupComponent,
   },
   {

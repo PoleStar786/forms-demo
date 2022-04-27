@@ -6,4 +6,5 @@ export class UserModel {
   mobile: number;
   age: number;
   crew: number[];
+  password?: string;
 }

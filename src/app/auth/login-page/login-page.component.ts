@@ -1,14 +1,14 @@
-import { User } from './../../core/interfaces/user';
-import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
+import { NgForm } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 
 import { AuthguardService } from '../../core/guard-service/authguard.service';
 import { SnackbarAlertService } from 'src/app/shared/shared-services/snackbar-alert/snackbar-alert.service';
 import { ApiService } from 'src/app/shared/shared-services/apis/api.service';
+import { UserModel } from 'src/app/core/models/user-dashboard.model';
 
 @Component({
   selector: 'app-login-page',
@@ -16,10 +16,14 @@ import { ApiService } from 'src/app/shared/shared-services/apis/api.service';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
-  public loginForm!: FormGroup;
+  public loginForm: FormGroup;
+  mobNumberPattern = '^((\\+91-?)|0)?[0-9]{10}$';
+  st: string;
 
   stateAlert: string;
   cantDelete: number;
+
+  isCheck = false;
 
   constructor(
     private router: Router,
@@ -35,37 +39,53 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+  onlyDigits(event: { charCode: number }) {
+    return event.charCode == 8 || event.charCode == 0
+      ? null
+      : event.charCode >= 48 && event.charCode <= 57;
+  }
+
+  // toggleView() {
+  //   console.log(this.isCheck);
+  // (click)="toggleView()"
+  // }
+
   onSubmit(form: NgForm) {
-    this.http
-      .get<any>('http://localhost:3000/posts')
-      // this.api.getUser()
-      .subscribe(
-        (res) => {
-          const user = res.find((a: User) => {
-            return (
-              a.email === form.value.email && a.password === form.value.password
-            );
-          });
-          if (user) {
-            form.reset();
-            this.router.navigate(['/home-page']);
-
-            localStorage.setItem('loggedInUser', JSON.stringify(user));
-            this.api.userNameSub$.next(user);
-
-            localStorage.setItem('isLoggedIn', 'true');
-
-            // this.getUsers();
+    let tempUser;
+    this.http.get<UserModel[]>('http://localhost:3000/posts').subscribe(
+      (res) => {
+        const user = res.find((userFields: UserModel) => {
+          if (!this.isCheck) {
+            tempUser =
+              userFields.email === form.value.email &&
+              userFields.password === form.value.password;
           } else {
-            this.stateAlert = 'UDE'; // User doesn't exists!
-            this._snackBar.openSnackBar(this.stateAlert);
+            tempUser =
+              userFields.mobile === form.value.mobile &&
+              userFields.password === form.value.password;
           }
-        },
-        (err) => {
-          this.stateAlert = 'SWW'; // Something went wrong
+
+          return tempUser;
+        });
+
+        if (user) {
+          form.reset();
+          this.router.navigate(['/home-page']);
+
+          localStorage.setItem('loggedInUser', JSON.stringify(user));
+          this.api.userNameSub$.next(user);
+
+          localStorage.setItem('isLoggedIn', 'true');
+        } else {
+          this.stateAlert = 'UDE'; // User doesn't exists!
           this._snackBar.openSnackBar(this.stateAlert);
         }
-      );
+      },
+      (_err) => {
+        this.stateAlert = 'SWW'; // Something went wrong
+        this._snackBar.openSnackBar(this.stateAlert);
+      }
+    );
 
     // if (this.accounts.some((el) => el.username === form.value.username)) {
     //   this.router.navigate(['/home-page']);
@@ -90,17 +110,10 @@ export class LoginPageComponent implements OnInit {
     // if(user.username === this.accounts[]){}
   }
 
-  // getUsers() {
-  //   console.log('running......');
-  //   this.api.getSubUser();
-  // }
-
   goToSignUp() {
     this.router.navigate(['/signup-page']);
   }
 }
-
-// To run json server: json-server --watch db.json
 
 /* reactive form */
 // this.loginForm = this.formBuilder.group({
@@ -110,12 +123,12 @@ export class LoginPageComponent implements OnInit {
 
 /////////////////////////////////////////////////
 // login() {
-//   this.http.get<any>('http://localhost:3000/posts').subscribe(
+//   this.http.get<UserMpdel[]>('http://localhost:3000/posts').subscribe(
 //     (res) => {
-//       const user = res.find((a: any) => {
+//       const user = res.find((userFields: UserModel) => {
 //         return (
-//           a.email === this.loginForm.value.email &&
-//           a.password === this.loginForm.value.password
+//           userFields.email === this.loginForm.value.email &&
+//           userFields.password === this.loginForm.value.password
 //         );
 //       });
 //       if (user) {

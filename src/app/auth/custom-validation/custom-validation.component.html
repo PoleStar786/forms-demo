@@ -1,0 +1,48 @@
+<div class="login-form">
+  <div class="card">
+    <h2 class="head py-2">Login</h2>
+    <form class="user-login" [formGroup]="customForm" (ngSubmit)="onLogin()">
+      <div class="row">
+        <ng-container>
+          <div class="col-md-12 roundedTextBox mb-3">
+            <label>E-mail</label>
+            <!-- (focus)="onFocus()" (focusout)="outFocus()" -->
+            <input type="email" class="form-control mb-2" id="inputEmail" formControlName="email"
+              placeholder="Enter Email"
+              [class.is-invalid]="(customForm.get('email')?.touched || customForm.get('email')?.dirty)">
+            <div *ngIf=" submitted && formControl?.['email']?.errors" class="text-danger">
+              <div *ngIf="formControl?.['email']?.['errors']?.['email']">Email must be valid.</div>
+              <div *ngIf="formControl?.['email']?.['errors']?.['required']">Email is required.</div>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container>
+          <div class="col-md-12 roundedTextBox mb-3">
+            <label>Mobile no.</label>
+            <input type="mobile" class="form-control mb-2" id="inputMobile" (keypress)="onlyDigits($event)"
+              formControlName="mobile" [class.is-invalid]="(customForm.get('mobile')?.touched ||
+              customForm.get('mobile')?.dirty)" placeholder="Enter Mobile No." minlength=10 maxlength=10>
+            <div *ngIf="submitted && formControl?.['mobile']?.errors" class="text-danger">
+              <div *ngIf="formControl?.['mobile']?.['errors']?.['required']">Mobile number is required.</div>
+              <div *ngIf="formControl?.['mobile']?.['errors']?.['pattern']">Mobile number must be valid.</div>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="col-md-12 roundedTextBox mb-3">
+          <label>Password</label>
+          <input type="password" class="form-control mb-2" id="inputPassword" formControlName="password"
+            placeholder="Enter Password">
+          <div *ngIf="submitted && formControl?.['password']?.['errors']" class="text-danger">
+            <div *ngIf="formControl?.['password']?.['errors']?.['required']">Password is required.</div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="buttons text-center">
+        <button class="btn-customBlue mr-2" type="submit">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

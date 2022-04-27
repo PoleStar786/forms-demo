@@ -26,7 +26,7 @@
 
   <!-- Loader -->
   <div class="loading-center" *ngIf="loading">
-    <mat-spinner diameter="40" color="accent"></mat-spinner>
+    <mat-spinner diameter="100" color="accent"></mat-spinner>
   </div>
 
   <div *ngIf="!isChecked">
@@ -74,14 +74,15 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Actions</th>
           <td mat-cell *matCellDef="let element">
-            <a style="color:darkgoldenrod;" (click)="editUser(element)" type="button" title="Edit User">
+            <button style="color:darkgoldenrod;" class="btn-style" (click)="editUser(element)" type="button"
+              title="Edit User">
               <i class="material-icons">edit</i>
-            </a>
+            </button>
             &nbsp;
-            <a style="color: red;" (click)="openConfirmationDialog(element)" type="button" class="mx-1"
+            <button style="color: red;" (click)="openConfirmationDialog(element)" type="button" class="mx-1 btn-style"
               title="Delete User">
               <i class="material-icons">delete</i>
-            </a>
+            </button>
           </td>
         </ng-container>
 

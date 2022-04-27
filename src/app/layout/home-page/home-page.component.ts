@@ -22,7 +22,6 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  tempo: any;
   constructor(
     private api: ApiService,
     private _snackBar: SnackbarAlertService,
@@ -95,9 +94,9 @@ export class HomePageComponent implements OnInit {
         this.uData = [];
 
         this.crewArr.forEach((c) => {
-          this.userData.filter((v: UserModel) => {
-            if (v.id === c) {
-              this.uData.push(v);
+          this.userData.filter((value: UserModel) => {
+            if (value.id === c) {
+              this.uData.push(value);
             }
           });
         });
@@ -126,6 +125,21 @@ export class HomePageComponent implements OnInit {
         const tempUser = JSON.parse(this.loggedInUser);
         tempUser['crew'] = this.crewArr;
         this.crewArr = this.crewArr;
+
+        this.api.updateUser(tempUser, tempUser.id).subscribe({
+          next: (_res) => {
+            if (
+              JSON.parse(localStorage.getItem('loggedInUser') || '{}').id ===
+              tempUser.id
+            ) {
+              this.api.userNameSub$.next(tempUser);
+              localStorage.setItem('loggedInUser', JSON.stringify(tempUser));
+            }
+          },
+          error: () => {
+            'error while deleting user! 🚧';
+          },
+        });
 
         localStorage.setItem('loggedInUser', JSON.stringify(tempUser));
 

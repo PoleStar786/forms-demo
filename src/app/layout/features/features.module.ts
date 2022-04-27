@@ -15,6 +15,7 @@ import { FeaturesRoutingModule } from './features-routing.module';
 import { UserDetailsPageComponent } from '../user-details-page/user-details-page.component';
 import { DtableComponent } from '../user-details-page/dtable/dtable.component';
 import { SidenavComponent } from '../sidenav/sidenav.component';
+import { JustLoginComponent } from 'src/app/auth/just-login/just-login.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
     UserDetailsPageComponent,
     DtableComponent,
     SidenavComponent,
+    JustLoginComponent,
   ],
   imports: [
     CommonModule,
@@ -46,6 +48,7 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
     UserDetailsPageComponent,
     DtableComponent,
     SidenavComponent,
+    JustLoginComponent,
   ],
 })
 export class FeaturesModule {}

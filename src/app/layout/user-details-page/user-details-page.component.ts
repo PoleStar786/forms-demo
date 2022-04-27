@@ -10,8 +10,8 @@ import { Element } from '../../core/interfaces/element';
 })
 export class UserDetailsPageComponent implements OnInit {
   indexValue: number = 0;
-  tableColumns: any;
-  tableData: any;
+  tableColumns: Column[];
+  tableData: Element[];
 
   firstTableColumns: Array<Column> = [
     {

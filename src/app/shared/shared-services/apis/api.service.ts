@@ -1,8 +1,8 @@
-import { UserModel } from './../../../core/models/user-dashboard.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject, BehaviorSubject, map } from 'rxjs';
-// import { map } from 'rxjs/operators';
+import { Subject, BehaviorSubject } from 'rxjs';
+
+import { UserModel } from './../../../core/models/user-dashboard.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,38 +12,43 @@ export class ApiService {
   public toggleHF = new BehaviorSubject<boolean>(false);
   public toggleView$ = new BehaviorSubject<boolean>(false);
   public addCrew$ = new Subject<any>();
+  public startTime$ = new Subject<string>();
 
   loggedInUser: string = localStorage.getItem('loggedInUser') || '{}';
   uData: UserModel[] = [];
   crewArr = [];
-  data: any;
+  data: UserModel;
   tempo: any;
+  post = 'http://localhost:3000/posts';
+  POST = 'http://localhost:3000/posts/';
+  subUser = 'http://localhost:3000/subUsers';
+  SUBUSER = 'http://localhost:3000/subUsers/';
 
   constructor(private http: HttpClient) {}
 
   postUser(data: UserModel) {
-    return this.http.post<UserModel>('http://localhost:3000/posts', data);
+    return this.http.post<UserModel>(this.post, data);
   }
 
   getUser() {
-    return this.http.get<UserModel>('http://localhost:3000/posts');
+    return this.http.get<UserModel>(this.post);
   }
 
   updateUser(data: UserModel, id: number) {
-    return this.http.put<UserModel>('http://localhost:3000/posts/' + id, data);
+    return this.http.put<UserModel>(this.POST + id, data);
   }
 
   deleteUser(id: number) {
-    return this.http.delete<UserModel>('http://localhost:3000/posts/' + id);
+    return this.http.delete<UserModel>(this.POST + id);
   }
 
   // crew users
   postSubUser(data: UserModel) {
-    return this.http.post<UserModel>('http://localhost:3000/subUsers', data);
+    return this.http.post<UserModel>(this.subUser, data);
   }
 
   getSubUser() {
-    return this.http.get<UserModel>('http://localhost:3000/subUsers');
+    return this.http.get<UserModel>(this.subUser);
     // .pipe(
     //   map((res) => {
     //     this.data = res;
@@ -62,19 +67,16 @@ export class ApiService {
   }
 
   updateSubUser(data: UserModel, id: number) {
-    return this.http.put<UserModel>(
-      'http://localhost:3000/subUsers/' + id,
-      data
-    );
+    return this.http.put<UserModel>(this.SUBUSER + id, data);
   }
 
   deleteSubUser(id: number) {
-    return this.http.delete<UserModel>('http://localhost:3000/subUsers/' + id);
+    return this.http.delete<UserModel>(this.SUBUSER + id);
   }
 
   // add id of crew to array in current user
   postID(id: number, cID: number) {
-    return this.http.put<UserModel>('http://localhost:3000/posts/' + id, cID);
+    return this.http.put<UserModel>(this.POST + id, cID);
   }
 }
 

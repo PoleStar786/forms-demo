@@ -48,29 +48,54 @@
 
 
 <div class="position-class">
+  <div>
+    E-mail
+    <mat-slide-toggle [(ngModel)]="isCheck" title="Toggle View" [aria-label]="st">
+    </mat-slide-toggle>
+    Mobile
+  </div>
+
   <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
 
     <mat-card class="example-card">
+
       <mat-card-title>
         <h1>Login</h1>
       </mat-card-title>
 
-      <mat-form-field appearance="standard">
-        <mat-label>E-mail</mat-label>
-        <input matInput required ngModel name="email" [email]="true" id="email" #email="ngModel" placeholder="E-mail"
-          autocomplete="on" title="Enter your E-mail">
-      </mat-form-field>
-      <span
-        *ngIf="loginForm.controls['email']?.invalid && (loginForm.controls['email']?.dirty || loginForm.controls['email']?.touched)">
-        <mat-error *ngIf="loginForm.controls['email'].errors?.['required']">You must enter your E-mail!
-        </mat-error>
-        <mat-error *ngIf="loginForm.controls['email'].errors?.['email']">Not a valid E-mail!</mat-error>
-      </span>
+      <ng-container *ngIf="!isCheck">
+        <mat-form-field appearance="standard">
+          <mat-label>E-mail</mat-label>
+          <input matInput required ngModel name="email" id="email" #email="ngModel" placeholder="E-mail"
+            autocomplete="on" title="Enter your E-mail" label="E-mail">
+        </mat-form-field>
+        <span
+          *ngIf="loginForm.controls['email']?.invalid && (loginForm.controls['email']?.dirty || loginForm.controls['email']?.touched)">
+          <mat-error *ngIf="loginForm.controls['email'].errors?.['required']">You must enter your E-mail!
+          </mat-error>
+          <mat-error *ngIf="loginForm.controls['email'].errors?.['email']">Not a valid E-mail!</mat-error>
+        </span>
+      </ng-container>
+
+      <ng-container *ngIf="isCheck">
+        <mat-form-field appearance="standard">
+          <mat-label>Mobile No.</mat-label>
+          <input matInput required ngModel name="mobile" id="mobile" #mobile="ngModel" (keypress)="onlyDigits($event)"
+            [pattern]="mobNumberPattern" placeholder="Mobile number" autocomplete="off" title="Enter your Mobile number"
+            label="Mobile" minlength=10 maxlength=10>
+        </mat-form-field>
+        <span
+          *ngIf="loginForm.controls['mobile']?.invalid && (loginForm.controls['mobile']?.dirty || loginForm.controls['mobile']?.touched)">
+          <mat-error *ngIf="loginForm.controls['mobile'].errors?.['required']">You must enter your Mobile number!
+          </mat-error>
+          <mat-error *ngIf="loginForm.controls['mobile'].errors?.['pattern']">Not a valid Mobile number!</mat-error>
+        </span>
+      </ng-container>
 
       <mat-form-field appearance="standard">
         <mat-label>Password</mat-label>
         <input matInput required ngModel name="password" id="password" #password="ngModel" placeholder="Password"
-          autocomplete="off" title="Enter your Password">
+          autocomplete="off" title="Enter your Password" label="password">
       </mat-form-field>
       <span
         *ngIf="loginForm.controls['password']?.invalid && (loginForm.controls['password']?.dirty || loginForm.controls['password']?.touched)">
@@ -83,18 +108,9 @@
 
       <div class="btn-margin">
         New User?
-        <a (click)="goToSignUp()" class="btn-signup" title="Go to Sign Up">Sign Up</a>
+        <button type="button" (click)="goToSignUp()" class="btn-signup" title="Go to Sign Up">Sign Up</button>
       </div>
     </mat-card>
   </form>
 
 </div>
-
-<!--
-          [type]="hide ? 'password' : 'text'"
-          <button mat-icon-button matSuffix (click)="hide = !hide"
-            [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button> 
-      -->

@@ -16,6 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSortModule } from '@angular/material/sort';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [],
@@ -36,6 +37,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatSlideToggleModule,
     MatTabsModule,
     MatSortModule,
+    MatRadioModule,
   ],
   exports: [
     MatToolbarModule,
@@ -53,6 +55,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatSlideToggleModule,
     MatTabsModule,
     MatSortModule,
+    MatRadioModule,
   ],
 })
 export class MaterialModule {}
