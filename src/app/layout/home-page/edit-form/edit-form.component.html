@@ -1,0 +1,76 @@
+<div class="custom-card">
+  <form [formGroup]="formValue">
+
+    <mat-card-header>
+      <mat-card-title>
+        <h1>User Details</h1>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="custom-space-class">
+        <!-- first name -->
+        <mat-form-field appearance="standard">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" type="text" required name="firstName" id="firstName"
+            autocomplete="off" placeholder="Add your First Name" title="Enter your First Name">
+          <mat-error *ngIf="formValue.controls['firstName'].errors?.['required']">You must enter your firstname!
+            ⚠️</mat-error>
+        </mat-form-field>
+
+        <!-- last name -->
+        <mat-form-field appearance="standard">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" type="text" required name="lastName" id="lastName"
+            placeholder="Add your Last Name" title="Enter your Last Name">
+          <mat-error *ngIf="formValue.controls['lastName'].errors?.['required']">You must enter your lastname!
+            ⚠️
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="custom-space-class">
+        <!-- age -->
+        <mat-form-field appearance="standard">
+          <mat-label>Age</mat-label>
+          <input matInput formControlName="age" type="text" required maxlength="3" name="age" id="age"
+            placeholder="Add your Full Name" title="Enter your Age">
+          <mat-error *ngIf="formValue.controls['age'].errors?.['required']">You must enter your age! ⚠️
+          </mat-error>
+          <mat-error *ngIf="formValue.controls['age'].errors?.['pattern']">
+            Please, Enter digits only! ⚠️
+          </mat-error>
+        </mat-form-field>
+
+        <!-- mobile -->
+        <mat-form-field appearance="standard">
+          <mat-label>Mobile Number</mat-label>
+          <input matInput formControlName="mobile" type="tel" (keypress)="onlyDigits($event)" maxlength="10" required
+            placeholder="Add your Mobile Number" title="Enter your Mobile Number">
+          <mat-error *ngIf="formValue.controls['mobile'].errors?.['required']">You must enter your mobile
+            number!
+            ⚠️</mat-error>
+          <mat-error *ngIf="formValue.controls['mobile'].errors?.['pattern']">Please, Enter digits only! ⚠️
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- email -->
+      <mat-form-field appearance="standard">
+        <mat-label>E-mail ID</mat-label>
+        <input matInput formControlName="email" type="email" name="email" id="email" placeholder="Add your E-mail"
+          title="Enter your E-mail">
+        <mat-error *ngIf="formValue.controls['email'].errors?.['required']">You must enter your E-mail! ⚠️
+        </mat-error>
+        <mat-error *ngIf="formValue.controls['email'].errors?.['email']">Not a valid E-mail! ⚠️</mat-error>
+      </mat-form-field>
+    </mat-card-content>
+
+    <div mat-card-actions [align]="'end'">
+      <button mat-raised-button color="accent" type="button" class="mx-2" id="cancel" title="Close"
+        mat-dialog-close>Close</button>
+      <button mat-raised-button color="primary" type="button" (click)="updateUser()" title="Update"
+        [disabled]="!formValue.valid">Update</button>
+    </div>
+  </form>
+</div>

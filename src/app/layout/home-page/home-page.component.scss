@@ -1,0 +1,75 @@
+.extra-margin {
+  margin: 80px 0 10px 10px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+}
+
+.custom-container {
+  padding-bottom: 70px;
+  padding-top: 80px;
+}
+
+.custom-table {
+  background-color: #fdfaf6;
+}
+
+table {
+  width: 100%;
+}
+
+.example-card {
+  margin: 10px;
+  background-color: #fdfaf6;
+}
+
+::ng-deep .success-snackbar {
+  background-color: green;
+  color: white;
+}
+
+::ng-deep .failure-snackbar {
+  background-color: red;
+  color: white;
+}
+
+::ng-deep .delete-snackbar {
+  background-color: brown;
+  color: white;
+}
+
+// spinner
+.loading-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+::ng-deep .mat-dialog-container {
+  background-color: #fdfaf6;
+  max-width: 600px !important;
+  width: 440px !important;
+}
+
+.mat-card:not([class*="mat-elevation-z"]) {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.custom-space-class {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.btn-style {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -1,0 +1,98 @@
+<div class="custom-container">
+  <div *ngIf="isChecked">
+    <!-- User Data in Card -->
+    <div class="content">
+      <div *ngFor="let row of userData">
+
+        <mat-card class="example-card custom-card">
+          <mat-card-title>{{row.firstName}} {{row.lastName}}</mat-card-title>
+          <mat-card-subtitle>{{row.email}}</mat-card-subtitle>
+          <mat-card-content>
+            <p>Mobile No.: {{row.mobile}}</p>
+            <p>Age: {{row.age}}</p>
+            <p>ID: {{row.id}}</p>
+          </mat-card-content>
+          <mat-card-actions [align]="'end'">
+            <a style="color:darkgoldenrod;" (click)="editUser(row)" type="button"><i class="material-icons">edit</i></a>
+            &nbsp;
+            <a style="color: red;" (click)="openConfirmationDialog(row)" class="mx-1" type="button"><i
+                class="material-icons">delete</i></a>
+          </mat-card-actions>
+        </mat-card>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Loader -->
+  <div class="loading-center" *ngIf="loading">
+    <mat-spinner diameter="100" color="accent"></mat-spinner>
+  </div>
+
+  <div *ngIf="!isChecked">
+    <!-- User Data in material Table -->
+    <div class="container" style="min-width: 90%;">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 custom-table">
+
+        <!-- ID -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- first name -->
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef> First Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+        </ng-container>
+
+        <!-- last name -->
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef> Last Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+        </ng-container>
+
+        <!-- email -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> E-mail </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <!-- mobile -->
+        <ng-container matColumnDef="mobile">
+          <th mat-header-cell *matHeaderCellDef> Mobile No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
+        </ng-container>
+
+        <!-- age -->
+        <ng-container matColumnDef="age">
+          <th mat-header-cell *matHeaderCellDef> Age </th>
+          <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+        </ng-container>
+
+        <!-- actions -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let element">
+            <button style="color:darkgoldenrod;" class="btn-style" (click)="editUser(element)" type="button"
+              title="Edit User">
+              <i class="material-icons">edit</i>
+            </button>
+            &nbsp;
+            <button style="color: red;" (click)="openConfirmationDialog(element)" type="button" class="mx-1 btn-style"
+              title="Delete User">
+              <i class="material-icons">delete</i>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="10" showFirstLastButtons
+        aria-label="Select page of users" class="custom-table">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

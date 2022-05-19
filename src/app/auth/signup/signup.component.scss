@@ -1,0 +1,35 @@
+.btn-margin {
+  margin-top: 20px;
+}
+
+.example-card {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fdfaf6;
+}
+
+.mat-card:not([class*="mat-elevation-z"]) {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.position-class {
+  width: 50%;
+  position: absolute;
+  top: 20%;
+  left: 10%;
+}
+
+::ng-deep .success-snackbar {
+  background-color: green;
+  color: white;
+}
+
+::ng-deep .failure-snackbar {
+  background-color: red;
+  color: white;
+}
+
+.btn-signup {
+  cursor: pointer;
+}

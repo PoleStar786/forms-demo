@@ -1,23 +1,130 @@
 {
   "posts": [
     {
-      "id": 1,
-      "firstName": "Dhruv",
-      "lastName": "Prajapati",
-      "email": "prajapatidhruv1110@gmail.com",
-      "mobile": "6353946018",
-      "age": "21"
+      "firstName": "Jack",
+      "lastName": "Pery",
+      "mobile": "9632587410",
+      "email": "jp@mail.com",
+      "password": "1234",
+      "age": "21",
+      "crew": [
+        4,
+        5
+      ],
+      "id": 3
     },
     {
-      "id": 3,
-      "firstName": "Kirtan",
-      "lastName": "Prajapati",
-      "email": "kp@gmail.com",
-      "mobile": "1122330099",
-      "age": "22"
+      "firstName": "Kathan",
+      "lastName": "Patel",
+      "mobile": "1234321344",
+      "email": "kp@mail.com",
+      "password": "1234",
+      "age": "11",
+      "crew": [],
+      "id": 4
+    },
+    {
+      "firstName": "Minnal",
+      "lastName": "Murli",
+      "mobile": "0192836231",
+      "email": "mm@mail.com",
+      "password": "1234",
+      "age": "24",
+      "crew": [],
+      "id": 5
+    },
+    {
+      "firstName": "Kanak",
+      "lastName": "Modi",
+      "mobile": "1234321123",
+      "email": "jm@mail.com",
+      "password": "1234",
+      "age": "23",
+      "crew": [],
+      "id": 6
+    },
+    {
+      "firstName": "Navya",
+      "lastName": "mehta",
+      "mobile": "2342234234",
+      "email": "nm@mail.om",
+      "password": "1",
+      "age": "21",
+      "crew": [],
+      "id": 7
+    },
+    {
+      "firstName": "Mohan",
+      "lastName": "Pyare",
+      "mobile": "2121212121",
+      "email": "mp@mail.com",
+      "password": "1234",
+      "age": "21",
+      "crew": [],
+      "id": 8
+    },
+    {
+      "firstName": "Mohak",
+      "lastName": "mali",
+      "mobile": "1221122112",
+      "email": "m@mail.com",
+      "password": "1234",
+      "age": "22",
+      "crew": [
+        1,
+        2,
+        3
+      ],
+      "id": 9
     }
   ],
-  "comments": [],
+  "subUsers": [
+    {
+      "firstName": "bhim",
+      "lastName": "aarya",
+      "mobile": "1232123431",
+      "email": "ba@mail.com",
+      "password": "1234",
+      "age": "23",
+      "id": 1
+    },
+    {
+      "firstName": "arjun",
+      "lastName": "aarya",
+      "mobile": "1233211233",
+      "email": "aa@mail.com",
+      "password": "1234",
+      "age": "22",
+      "id": 2
+    },
+    {
+      "firstName": "Yudhisthir",
+      "lastName": "Aarya",
+      "mobile": "9878979878",
+      "email": "ya@mail.com",
+      "password": "1234",
+      "age": "24",
+      "id": 3
+    },
+    {
+      "firstName": "sahadev",
+      "lastName": "aarya",
+      "mobile": "9878979879",
+      "email": "sa@mail.com",
+      "password": "1234",
+      "age": "21",
+      "id": 4
+    },
+    {
+      "firstName": "nakul",
+      "lastName": "aarya",
+      "mobile": "3252434531",
+      "email": "na@mail.com",
+      "password": "1234",
+      "age": "20",
+      "id": 5
+    }
+  ],
   "profile": {
     "name": "typicode"
   }

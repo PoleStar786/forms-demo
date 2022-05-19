@@ -1,0 +1,22 @@
+.extra-padding {
+  padding-top: 70px;
+}
+
+.buttonWrapper {
+  display: flex;
+}
+
+button {
+  letter-spacing: 3px;
+  border: none;
+  padding: 10px;
+  background-color: #bccbe9;
+  color: #232c3d;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+button:hover {
+  background-color: #d5e3ff;
+}
