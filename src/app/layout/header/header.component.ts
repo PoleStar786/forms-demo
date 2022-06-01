@@ -75,7 +75,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
-  goToUserDetails() {
-    this.router.navigate(['/user-details-page/users-table']);
+  goToHomePage() {
+    this.router.navigate(['/home-page']);
+  }
+
+  goToUserProfile() {
+    this.router.navigate(['/user-profile']);
+  }
+
+  goToDYTables() {
+    this.router.navigate(['/users-table']);
+  }
+
+  goToMap() {
+    this.router.navigate(['/ggl-map']);
   }
 }

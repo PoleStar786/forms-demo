@@ -3,8 +3,8 @@
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Neon" #input>
 </mat-form-field>
 
-<div>
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 custom-container" style="width: 100%;">
+<div class='mat-elevation-z8 container cust-space'>
+  <table mat-table [dataSource]="dataSource" matSort class="custom-table" style="width: 100%;">
     <ng-container *ngFor="let displayCol of tableColumns let colIndex = index;" matColumnDef="{{displayCol.columnDef}}">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ displayCol.header }}
@@ -30,13 +30,12 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns">
-    </tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-    </tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="10" showFirstLastButtons aria-label="Select page of users"
-    class="custom-table">
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="20" showFirstLastButtons aria-label="Select page of users"
+    class="custom-color">
   </mat-paginator>
 </div>

@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Upload Image</h1>
+<div mat-dialog-content>
+  <input type="file" class="custom-file-input" id="customFile" name="profilePicture" (change)="onFileSelect($event)"
+    #UploadFileInput>
+</div>
+<div mat-dialog-actions [align]="'end'">
+  <button (click)="onFormSubmit()" mat-raised-button color="primary" mat-dialog-close> Upload </button>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

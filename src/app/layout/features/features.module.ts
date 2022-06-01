@@ -16,6 +16,8 @@ import { UserDetailsPageComponent } from '../user-details-page/user-details-page
 import { DtableComponent } from '../user-details-page/dtable/dtable.component';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { JustLoginComponent } from 'src/app/auth/just-login/just-login.component';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { ImageUploaderComponent } from '../user-profile/image-uploader/image-uploader.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { JustLoginComponent } from 'src/app/auth/just-login/just-login.component
     DtableComponent,
     SidenavComponent,
     JustLoginComponent,
+    UserProfileComponent,
+    ImageUploaderComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +53,8 @@ import { JustLoginComponent } from 'src/app/auth/just-login/just-login.component
     DtableComponent,
     SidenavComponent,
     JustLoginComponent,
+    UserProfileComponent,
+    ImageUploaderComponent,
   ],
 })
 export class FeaturesModule {}

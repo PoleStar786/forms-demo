@@ -80,8 +80,8 @@
   ],
   "subUsers": [
     {
-      "firstName": "bhim",
-      "lastName": "aarya",
+      "firstName": "Bhim",
+      "lastName": "Aarya",
       "mobile": "1232123431",
       "email": "ba@mail.com",
       "password": "1234",
@@ -89,8 +89,8 @@
       "id": 1
     },
     {
-      "firstName": "arjun",
-      "lastName": "aarya",
+      "firstName": "Arjun",
+      "lastName": "Aarya",
       "mobile": "1233211233",
       "email": "aa@mail.com",
       "password": "1234",
@@ -107,8 +107,8 @@
       "id": 3
     },
     {
-      "firstName": "sahadev",
-      "lastName": "aarya",
+      "firstName": "Sahadev",
+      "lastName": "Aarya",
       "mobile": "9878979879",
       "email": "sa@mail.com",
       "password": "1234",
@@ -116,8 +116,8 @@
       "id": 4
     },
     {
-      "firstName": "nakul",
-      "lastName": "aarya",
+      "firstName": "Nakul",
+      "lastName": "Aarya",
       "mobile": "3252434531",
       "email": "na@mail.com",
       "password": "1234",
@@ -125,7 +125,5 @@
       "id": 5
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "profile": {}
 }

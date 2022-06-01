@@ -26,6 +26,10 @@ export class SnackbarAlertService {
       DUS: 'Data Updated Successfully! 🤖',
       UDE: `User doesn't Exists! 🤖`,
       CDU: 'Oops, cannot delete Logged In User! 🤖',
+      IOS: 'Image Uploaded Successfully. 🥳',
+      PUI: 'Please Upload Image! 🚧',
+      JPO: 'Only JPG & PNG Image Supported! 😢',
+      FTL: 'File too large!! 😒',
     };
 
     const alertContentState: any = {
@@ -36,6 +40,10 @@ export class SnackbarAlertService {
       DUS: 'success',
       UDE: 'failure',
       CDU: 'failure',
+      IOS: 'success',
+      PUI: 'failure',
+      JPO: 'failure',
+      FTL: 'failure',
     };
 
     return [

@@ -11,7 +11,7 @@ export class DeleteConfirmationDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<DeleteConfirmationDialogComponent>
   ) {}
 
-  public confirmMessage!: string;
+  public confirmMessage: string;
 
   ngOnInit(): void {}
 }

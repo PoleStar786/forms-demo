@@ -14,9 +14,12 @@ import { FeaturesModule } from './layout/features/features.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { MapComponent } from './layout/map/map.component';
+
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MapComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,10 +37,13 @@ import { environment } from '../environments/environment';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    AgmCoreModule.forRoot({
+      apiKey: 'YOUR GOOGLE API',
+      libraries: ['places'],
+    }),
   ],
   exports: [MaterialModule],
   providers: [],
-  // in order to call one component in another we need to add that component in providers (ask why?)
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -4,8 +4,20 @@
      <small class="ms-3"> {{loggedUserName}} </small>
    </span>
 
-   <button mat-icon-button class="btn-user" color="accent" (click)="goToUserDetails()">
+   <button mat-icon-button class="btn-user" color="accent" (click)="goToHomePage()">
+     <span class="material-icons">home</span>
+   </button>
+
+   <button mat-icon-button class="btn-user" color="accent" (click)="goToUserProfile()">
      <span class="material-icons">emoji_emotions</span>
+   </button>
+   
+   <button mat-icon-button class="btn-user" color="accent" (click)="goToMap()" disabled>
+     <span class="material-icons">map</span>
+   </button>
+   
+   <button mat-icon-button class="btn-user" color="accent" (click)="goToDYTables()">
+     <span class="material-icons">table_chart</span>
    </button>
 
    <span class="example-spacer"></span>
