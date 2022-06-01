@@ -17,6 +17,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSortModule } from '@angular/material/sort';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [],
@@ -38,6 +39,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatTabsModule,
     MatSortModule,
     MatRadioModule,
+    MatMenuModule,
   ],
   exports: [
     MatToolbarModule,
@@ -56,6 +58,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatTabsModule,
     MatSortModule,
     MatRadioModule,
+    MatMenuModule,
   ],
 })
 export class MaterialModule {}

@@ -5,6 +5,7 @@ import { AuthenticationGuard } from './core/guard/authentication.guard';
 
 import { LoginPageComponent } from './auth/login-page/login-page.component';
 import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.component';
+import { MapComponent } from './layout/map/map.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login-page', pathMatch: 'full' },
@@ -36,10 +37,14 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard],
   },
   {
-    path: 'user-details-page',
+    path: '',
     loadChildren: () =>
       import('./layout/features/features.module').then((i) => i.FeaturesModule),
     canActivate: [AuthenticationGuard],
+  },
+  {
+    path: 'ggl-map',
+    component: MapComponent
   },
   { path: '**', component: PageNotFoundComponent },
 ];

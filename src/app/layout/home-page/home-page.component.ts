@@ -93,9 +93,9 @@ export class HomePageComponent implements OnInit {
         this.userData = res;
         this.uData = [];
 
-        this.crewArr.forEach((c) => {
+        this.crewArr.forEach((chunk) => {
           this.userData.filter((value: UserModel) => {
-            if (value.id === c) {
+            if (value.id === chunk) {
               this.uData.push(value);
             }
           });
@@ -128,10 +128,7 @@ export class HomePageComponent implements OnInit {
 
         this.api.updateUser(tempUser, tempUser.id).subscribe({
           next: (_res) => {
-            if (
-              JSON.parse(localStorage.getItem('loggedInUser') || '{}').id ===
-              tempUser.id
-            ) {
+            if (this.loggedInUserID === tempUser.id) {
               this.api.userNameSub$.next(tempUser);
               localStorage.setItem('loggedInUser', JSON.stringify(tempUser));
             }
